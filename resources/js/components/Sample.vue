@@ -1,3 +1,3 @@
 <template>
-  <h1>Sample</h1>
+  <h1>Sample vue-router</h1>
 </template>

@@ -28,9 +28,7 @@
 </head>
 
 <body>
-    <div id="app">
-        <Sample></Sample>
-    </div>
+    <div id="app"></div>
 </body>
 
 </html>

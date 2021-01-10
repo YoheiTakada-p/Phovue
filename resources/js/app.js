@@ -1,3 +1,6 @@
+import App from './App.vue';
+import router from './router';
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -19,8 +22,6 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('sample', require('./components/Sample.vue').default);
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -29,4 +30,7 @@ Vue.component('sample', require('./components/Sample.vue').default);
 
 const app = new Vue({
     el: '#app',
+    router,
+    components: { App },
+    template: '<App />'
 });
