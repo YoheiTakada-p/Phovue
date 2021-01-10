@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <!-- Font -->
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  <!-- style -->
+  <style>
+    .btn-gray {
+      color: #fff;
+      background-color: #1e202259;
+    }
+
+    .photo-form {
+      min-width: 25rem;
+    }
+  </style>
+
+  <title>photo-vue</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Phovue</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!-- Login -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Login
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <form class="form-group my-2 mx-2 my-lg-0">
+              <div class="form-group">
+                <label>Email address</label>
+                <input type="email" class="form-control" placeholder="Enter email">
+                <small class="form-text text-muted">We'll never share your email with anyone
+                  else.</small>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password">
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="col-6 text-center m-auto">
+                  <a href="#">Resister</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </li>
+        <!-- Photo -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Photo
+          </a>
+          <div class="dropdown-menu photo-form" aria-labelledby="navbarDropdown">
+            <form class="form-group my-2 mx-2 my-lg-0">
+              <div class="form-group">
+                <label>Photo select</label>
+                <input type="file" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="Textarea1">Comment</label>
+                <textarea class="form-control" id="Textarea1" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Navbar end -->
+
+  <!-- PhotoList -->
+  <div class="container mt-3">
+    <div class="card-columns">
+      <div class="card">
+        <div class="position-relative">
+          <img src="./img/51METSACVHL._AC_.jpg" class="card-img" alt="...">
+          <a class="card-img-overlay" data-toggle="collapse" href="#collapse-comment-0" role="button"
+            aria-expanded="false" aria-controls="collapse-comment-0"></a>
+        </div>
+        <div class="card-body" style="padding: 0.7rem">
+          <div class="collapse" id="collapse-comment-0">
+            <div>
+              <p class="text-justify">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet
+                fermentum. Donec sed odio operae, eu vulputate felis rhoncus. Praeterea iter est quasdam res quas ex
+                communi. At nos hinc posthac, sitientis piros Afros. Petierunt uti sibi concilium totius Galliae in diem
+                certam indicere. Cras mattis iudicium purus sit amet fermentum.</p>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span class="my-auto">name</span>
+            <div>
+              <button class="btn btn-sm btn-gray">
+                <i class="fas fa-heart" style="color: pink"></i>1
+              </button>
+              <a href="#" class="btn btn-sm btn-gray">
+                <i class="fas fa-download" style="color: white"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="position-relative">
+          <img src="./img/200px-TaroTokyo20110213-TokyoTower-01min.jpg" class="card-img" alt="...">
+          <a class="card-img-overlay" data-toggle="collapse" href="#collapse-comment-1" role="button"
+            aria-expanded="false" aria-controls="collapse-comment-1"></a>
+        </div>
+        <div class="card-body" style="padding: 0.7rem">
+          <div class="collapse" id="collapse-comment-1">
+            <div>
+              <p class="text-justify">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet
+                fermentum. Donec sed odio operae, eu vulputate felis rhoncus. Praeterea iter est quasdam res quas ex
+                communi. At nos hinc posthac, sitientis piros Afros. Petierunt uti sibi concilium totius Galliae in diem
+                certam indicere. Cras mattis iudicium purus sit amet fermentum.</p>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span class="my-auto">name</span>
+            <div>
+              <button class="btn btn-sm btn-gray">
+                <i class="fas fa-heart" style="color: pink"></i>1
+              </button>
+              <a href="#" class="btn btn-sm btn-gray">
+                <i class="fas fa-download" style="color: white"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="position-relative">
+          <img src="./img/large_original_aspect_4fa9edb8-5b26-435c-8fca-2611a4030a44.jpg" class="card-img" alt="...">
+          <a class="card-img-overlay" data-toggle="collapse" href="#collapse-comment-2" role="button"
+            aria-expanded="false" aria-controls="collapse-comment-2"></a>
+        </div>
+        <div class="card-body" style="padding: 0.7rem">
+          <div class="collapse" id="collapse-comment-2">
+            <div>
+              <p class="text-justify">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet
+                fermentum. Donec sed odio operae, eu vulputate felis rhoncus. Praeterea iter est quasdam res quas ex
+                communi. At nos hinc posthac, sitientis piros Afros. Petierunt uti sibi concilium totius Galliae in diem
+                certam indicere. Cras mattis iudicium purus sit amet fermentum.</p>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span class="my-auto">name</span>
+            <div>
+              <button class="btn btn-sm btn-gray">
+                <i class="fas fa-heart" style="color: pink"></i>1
+              </button>
+              <a href="#" class="btn btn-sm btn-gray">
+                <i class="fas fa-download" style="color: white"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="position-relative">
+          <img src="./img/sky14.jpg" class="card-img" alt="...">
+          <a class="card-img-overlay" data-toggle="collapse" href="#collapse-comment-3" role="button"
+            aria-expanded="false" aria-controls="collapse-comment-3"></a>
+        </div>
+        <div class="card-body" style="padding: 0.7rem">
+          <div class="collapse" id="collapse-comment-3">
+            <div>
+              <p class="text-justify">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet
+                fermentum. Donec sed odio operae, eu vulputate felis rhoncus. Praeterea iter est quasdam res quas ex
+                communi. At nos hinc posthac, sitientis piros Afros. Petierunt uti sibi concilium totius Galliae in diem
+                certam indicere. Cras mattis iudicium purus sit amet fermentum.</p>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span class="my-auto">name</span>
+            <div>
+              <button class="btn btn-sm btn-gray">
+                <i class="fas fa-heart" style="color: pink"></i>1
+              </button>
+              <a href="#" class="btn btn-sm btn-gray">
+                <i class="fas fa-download" style="color: white"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- PhotoList end -->
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
