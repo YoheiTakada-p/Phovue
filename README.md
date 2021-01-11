@@ -1,7 +1,7 @@
 ## phovue  
-ちょっとした事を写真いっしょにさくっと投稿してみよう  
+ちょっとした事を写真といっしょにさくっと投稿してみよう  
 
-laravelとvueを使ってプログラム作ります  
+laravelとvueの練習です  
 
 構築環境  
 https://github.com/YoheiTakada-p/my-docker-laravel
