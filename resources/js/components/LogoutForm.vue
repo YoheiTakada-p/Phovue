@@ -10,7 +10,7 @@
 export default {
   methods: {
     logout: async function () {
-      this.$store.dispatch("auth/logout");
+      await this.$store.dispatch("auth/logout");
     },
   },
 };
