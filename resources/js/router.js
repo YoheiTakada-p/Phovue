@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Sample from './components/Sample.vue'
+import PhotoList from './pages/PhotoList.vue';
+import Register from './pages/Register.vue';
 
 Vue.use(VueRouter);
 
@@ -10,8 +11,13 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      component: Sample
+      component: PhotoList
+    },
+    {
+      path: '/register',
+      component: Register
     }
   ]
-})
+});
+
 export default router;
