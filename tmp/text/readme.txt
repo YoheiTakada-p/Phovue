@@ -34,7 +34,7 @@ likes
 API
 
 '/api/register' [POST] 会員登録
-'/api/login' [GET] ログイン
+'/api/login' [POST] ログイン
 '/api/logout' [POST, auth] ログアウト
 '/api/photos' [GET] 写真一覧取得
 '/api/photos' [POST, auth] 写真投稿
