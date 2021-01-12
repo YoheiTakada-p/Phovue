@@ -21,7 +21,7 @@ class LoginTest extends TestCase
     /**
      * @test
      */
-    public function ログインテスト()
+    public function ログイン()
     {
         $response = $this->json('POST', route('login', [
             'email' => $this->user->email,

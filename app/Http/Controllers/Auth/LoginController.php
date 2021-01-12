@@ -43,7 +43,7 @@ class LoginController extends Controller
     /**
      * ログインのリダイレクトを操作
      */
-    public function authenticated(Request $request, $user)
+    protected function authenticated(Request $request, $user)
     {
         return $user;
     }
