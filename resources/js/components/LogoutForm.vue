@@ -1,7 +1,7 @@
 <template>
   <li class="nav-item">
     <div>
-      <a class="nav-link" href="#" v-on:click.prevent="logout">Logout</a>
+      <a class="nav-link" href="" v-on:click.prevent="logout">Logout</a>
     </div>
   </li>
 </template>
@@ -11,6 +11,8 @@ export default {
   methods: {
     logout: async function () {
       await this.$store.dispatch("auth/logout");
+
+      this.$router.push("/", () => {});
     },
   },
 };

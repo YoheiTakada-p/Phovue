@@ -9,17 +9,27 @@
       aria-haspopup="true"
       aria-expanded="false"
     >
-      Login
+      Register
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-      <form class="form-group my-2 mx-2 my-lg-0" v-on:submit.prevent="login">
+      <form class="form-group my-2 mx-2 my-lg-0" v-on:submit.prevent="register">
+        <div class="form-group">
+          <label>Name</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter name"
+            v-bind:value="registerForm.name"
+            v-on:input="registerForm.name = $event.target.value"
+          />
+        </div>
         <div class="form-group">
           <label>Email address</label>
           <input
             type="email"
             class="form-control"
             placeholder="Enter email"
-            v-model="loginForm.email"
+            v-model="registerForm.email"
           />
           <small class="form-text text-muted"
             >We'll never share your email with anyone else.</small
@@ -31,7 +41,16 @@
             type="password"
             class="form-control"
             placeholder="Password"
-            v-model="loginForm.password"
+            v-model="registerForm.password"
+          />
+        </div>
+        <div class="form-group">
+          <label>Password confirm</label>
+          <input
+            type="password_confirmation"
+            class="form-control"
+            placeholder="Password confirm"
+            v-model="registerForm.password_confirmation"
           />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -44,15 +63,19 @@
 export default {
   data: function () {
     return {
-      loginForm: {
+      registerForm: {
+        name: "",
         email: "",
         password: "",
+        password_confirmation: "",
       },
     };
   },
   methods: {
-    login: async function () {
-      await this.$store.dispatch("auth/login", this.loginForm);
+    register: async function () {
+      await this.$store.dispatch("auth/register", this.registerForm);
+
+      console.log(this.$store.getters["auth/user"]);
 
       this.$router.push("/", () => {});
     },
