@@ -17,6 +17,7 @@
       <ul class="navbar-nav mr-auto">
         <LoginForm />
         <PhotoForm />
+        <LogoutForm />
       </ul>
     </div>
   </nav>
@@ -24,12 +25,14 @@
 
 <script>
 import LoginForm from "./LoginForm";
+import LogoutForm from "./LogoutForm";
 import PhotoForm from "./PhotoForm";
 
 export default {
   components: {
     LoginForm,
     PhotoForm,
+    LogoutForm,
   },
 };
 </script>
