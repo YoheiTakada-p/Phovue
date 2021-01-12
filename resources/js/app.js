@@ -1,5 +1,7 @@
 import App from './App.vue';
 import router from './router';
+import store from './store'
+
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -31,6 +33,7 @@ window.Vue = require('vue');
 const app = new Vue({
     el: '#app',
     router,
+    store,
     components: { App },
     template: '<App />'
 });
