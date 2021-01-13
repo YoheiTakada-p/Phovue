@@ -31,7 +31,7 @@ const actions = {
     const response = await axios.post('/api/register', data)
       .catch(error => error.response)
 
-    if (response.status === 200) {
+    if (response.status === 201) {
       context.commit('setUser', response.data)
       return false
     }
