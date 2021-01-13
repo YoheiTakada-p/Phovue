@@ -38,7 +38,7 @@ export default {
     errorAlert: {
       handler: function (value) {
         if (value) {
-          alert("システムエラーが発生しました");
+          alert(value + ":システムエラーが発生しました");
           this.$store.commit("error/setAlert", null);
         }
       },

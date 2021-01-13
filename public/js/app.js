@@ -1959,7 +1959,7 @@ __webpack_require__.r(__webpack_exports__);
     errorAlert: {
       handler: function handler(value) {
         if (value) {
-          alert("システムエラーが発生しました");
+          alert(value + ":システムエラーが発生しました");
           this.$store.commit("error/setAlert", null);
         }
       },
@@ -2029,6 +2029,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2037,6 +2050,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         password: ""
       }
     };
+  },
+  computed: {
+    loginErrors: function loginErrors() {
+      return this.$store.state.auth.loginErrorMessages;
+    }
   },
   methods: {
     login: function () {
@@ -2049,6 +2067,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return this.$store.dispatch("auth/login", this.loginForm);
 
               case 2:
+                this.loginForm.password = "";
+
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -2061,7 +2082,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return login;
-    }()
+    }(),
+    clearError: function clearError() {
+      this.$store.commit("auth/setLoginErrorMessages", null);
+    }
+  },
+  created: function created() {
+    this.clearError();
   }
 });
 
@@ -2104,9 +2131,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return this.$store.dispatch("auth/logout");
 
               case 2:
-                this.$router.push("/", function () {});
-
-              case 3:
               case "end":
                 return _context.stop();
             }
@@ -2270,6 +2294,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2280,6 +2322,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         password_confirmation: ""
       }
     };
+  },
+  computed: {
+    registerErrors: function registerErrors() {
+      return this.$store.state.auth.registerErrorMessages;
+    }
   },
   methods: {
     register: function () {
@@ -2292,8 +2339,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return this.$store.dispatch("auth/register", this.registerForm);
 
               case 2:
-                console.log(this.$store.getters["auth/user"]);
-                this.$router.push("/", function () {});
+                this.registerForm.password = "";
+                this.registerForm.password_confirmation = "";
 
               case 4:
               case "end":
@@ -2308,7 +2355,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return register;
-    }()
+    }(),
+    clearError: function clearError() {
+      this.$store.commit("auth/setRegisterErrorMessages", null);
+    }
+  },
+  created: function created() {
+    this.clearError();
   }
 });
 
@@ -38711,7 +38764,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "dropdown-menu",
+        staticClass: "dropdown-menu form-size",
         attrs: { "aria-labelledby": "navbarDropdown" }
       },
       [
@@ -38727,6 +38780,37 @@ var render = function() {
             }
           },
           [
+            _vm.loginErrors
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "mb-1 border border-danger rounded text-secondary bg-error"
+                  },
+                  [
+                    _vm.loginErrors.email
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.loginErrors.email, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.loginErrors.password
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.loginErrors.password, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
+                      : _vm._e()
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Email address")]),
               _vm._v(" "),
@@ -38740,7 +38824,11 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "email", placeholder: "Enter email" },
+                attrs: {
+                  type: "email",
+                  placeholder: "Enter email",
+                  required: ""
+                },
                 domProps: { value: _vm.loginForm.email },
                 on: {
                   input: function($event) {
@@ -38770,7 +38858,11 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "password", placeholder: "Password" },
+                attrs: {
+                  type: "password",
+                  placeholder: "Password",
+                  required: ""
+                },
                 domProps: { value: _vm.loginForm.password },
                 on: {
                   input: function($event) {
@@ -39071,7 +39163,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "dropdown-menu",
+        staticClass: "dropdown-menu form-size",
         attrs: { "aria-labelledby": "navbarDropdown" }
       },
       [
@@ -39087,12 +39179,57 @@ var render = function() {
             }
           },
           [
+            _vm.registerErrors
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "mb-1 border border-danger rounded text-secondary bg-error"
+                  },
+                  [
+                    _vm.registerErrors.name
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.registerErrors.email, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.registerErrors.email
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.registerErrors.email, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.registerErrors.password
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.registerErrors.password, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
+                      : _vm._e()
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Name")]),
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Enter name" },
+                attrs: {
+                  type: "text",
+                  placeholder: "Enter name",
+                  required: ""
+                },
                 domProps: { value: _vm.registerForm.name },
                 on: {
                   input: function($event) {
@@ -39115,7 +39252,11 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "email", placeholder: "Enter email" },
+                attrs: {
+                  type: "email",
+                  placeholder: "Enter email",
+                  required: ""
+                },
                 domProps: { value: _vm.registerForm.email },
                 on: {
                   input: function($event) {
@@ -39145,7 +39286,11 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "password", placeholder: "Password" },
+                attrs: {
+                  type: "password",
+                  placeholder: "Password",
+                  required: ""
+                },
                 domProps: { value: _vm.registerForm.password },
                 on: {
                   input: function($event) {
@@ -39172,8 +39317,9 @@ var render = function() {
                 ],
                 staticClass: "form-control",
                 attrs: {
-                  type: "password_confirmation",
-                  placeholder: "Password confirm"
+                  type: "password",
+                  placeholder: "Password confirm",
+                  required: ""
                 },
                 domProps: { value: _vm.registerForm.password_confirmation },
                 on: {
@@ -56528,7 +56674,9 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var state = {
-  user: null
+  user: null,
+  loginErrorMessages: null,
+  registerErrorMessages: null
 };
 var getters = {
   user: function user(state) {
@@ -56544,9 +56692,16 @@ var getters = {
 var mutations = {
   setUser: function setUser(state, data) {
     state.user = data;
+  },
+  setLoginErrorMessages: function setLoginErrorMessages(state, messages) {
+    state.loginErrorMessages = messages;
+  },
+  setRegisterErrorMessages: function setRegisterErrorMessages(state, messages) {
+    state.registerErrorMessages = messages;
   }
 };
 var actions = {
+  //会員登録
   register: function register(context, data) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
       var response;
@@ -56556,13 +56711,31 @@ var actions = {
             case 0:
               console.log('会員登録');
               _context.next = 3;
-              return axios.post('/api/register', data);
+              return axios.post('/api/register', data)["catch"](function (error) {
+                return error.response;
+              });
 
             case 3:
               response = _context.sent;
-              context.commit('setUser', response.data);
 
-            case 5:
+              if (!(response.status === 200)) {
+                _context.next = 7;
+                break;
+              }
+
+              context.commit('setUser', response.data);
+              return _context.abrupt("return", false);
+
+            case 7:
+              if (response.status === 422) {
+                context.commit('setRegisterErrorMessages', response.data.errors);
+              } else {
+                context.commit('error/setAlert', true, {
+                  root: true
+                });
+              }
+
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -56570,6 +56743,7 @@ var actions = {
       }, _callee);
     }))();
   },
+  //ログイン
   login: function login(context, data) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
       var response;
@@ -56595,9 +56769,14 @@ var actions = {
               return _context2.abrupt("return", false);
 
             case 7:
-              context.commit('error/setAlert', true, {
-                root: true
-              });
+              if (response.status === 422) {
+                console.log(response.data.errors);
+                context.commit('setLoginErrorMessages', response.data.errors);
+              } else {
+                context.commit('error/setAlert', true, {
+                  root: true
+                });
+              }
 
             case 8:
             case "end":
@@ -56607,6 +56786,7 @@ var actions = {
       }, _callee2);
     }))();
   },
+  //ログアウト
   logout: function logout(context, data) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
       var response;
@@ -56616,11 +56796,20 @@ var actions = {
             case 0:
               console.log('ログアウト');
               _context3.next = 3;
-              return axios.post('/api/logout');
+              return axios.post('/api/logout')["catch"](function (error) {
+                return error.response;
+              });
 
             case 3:
               response = _context3.sent;
-              context.commit('setUser', null);
+
+              if (response.status === 200) {
+                context.commit('setUser', null);
+              } else {
+                context.commit('error/setAlert', true, {
+                  root: true
+                });
+              }
 
             case 5:
             case "end":
@@ -56630,6 +56819,7 @@ var actions = {
       }, _callee3);
     }))();
   },
+  //ユーサー取得
   currentUser: function currentUser(context) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
       var response, user;
@@ -56639,15 +56829,24 @@ var actions = {
             case 0:
               console.log('ユーザー取得');
               _context4.next = 3;
-              return axios.get('/api/user');
+              return axios.get('/api/user')["catch"](function (error) {
+                return error.response;
+              });
 
             case 3:
               response = _context4.sent;
-              //ユーザー情報がない場合は空文字が送られてくるため、nullに変換する
-              user = response.data || null;
-              context.commit('setUser', user);
 
-            case 6:
+              if (response.status === 200) {
+                //ユーザー情報がない場合は空文字が送られてくるため、nullに変換する
+                user = response.data || null;
+                context.commit('setUser', user);
+              } else {
+                context.commit('error/setAlert', true, {
+                  root: true
+                });
+              }
+
+            case 5:
             case "end":
               return _context4.stop();
           }

@@ -27,6 +27,14 @@
             background-color: #1e202259;
         }
 
+        .bg-error {
+            background-color: #ffc0cb;
+        }
+
+        .form-size {
+            min-width: 25rem
+        }
+
         .photo-form {
             min-width: 25rem;
         }

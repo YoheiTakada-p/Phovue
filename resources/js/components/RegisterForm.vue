@@ -11,8 +11,22 @@
     >
       Register
     </a>
-    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <div class="dropdown-menu form-size" aria-labelledby="navbarDropdown">
       <form class="form-group my-2 mx-2 my-lg-0" v-on:submit.prevent="register">
+        <div
+          class="mb-1 border border-danger rounded text-secondary bg-error"
+          v-if="registerErrors"
+        >
+          <ul v-if="registerErrors.name">
+            <li v-for="msg in registerErrors.email" :key="msg">{{ msg }}</li>
+          </ul>
+          <ul v-if="registerErrors.email">
+            <li v-for="msg in registerErrors.email" :key="msg">{{ msg }}</li>
+          </ul>
+          <ul v-if="registerErrors.password">
+            <li v-for="msg in registerErrors.password" :key="msg">{{ msg }}</li>
+          </ul>
+        </div>
         <div class="form-group">
           <label>Name</label>
           <input
@@ -21,6 +35,7 @@
             placeholder="Enter name"
             v-bind:value="registerForm.name"
             v-on:input="registerForm.name = $event.target.value"
+            required
           />
         </div>
         <div class="form-group">
@@ -30,6 +45,7 @@
             class="form-control"
             placeholder="Enter email"
             v-model="registerForm.email"
+            required
           />
           <small class="form-text text-muted"
             >We'll never share your email with anyone else.</small
@@ -42,15 +58,17 @@
             class="form-control"
             placeholder="Password"
             v-model="registerForm.password"
+            required
           />
         </div>
         <div class="form-group">
           <label>Password confirm</label>
           <input
-            type="password_confirmation"
+            type="password"
             class="form-control"
             placeholder="Password confirm"
             v-model="registerForm.password_confirmation"
+            required
           />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -71,14 +89,23 @@ export default {
       },
     };
   },
+  computed: {
+    registerErrors: function () {
+      return this.$store.state.auth.registerErrorMessages;
+    },
+  },
   methods: {
     register: async function () {
       await this.$store.dispatch("auth/register", this.registerForm);
-
-      console.log(this.$store.getters["auth/user"]);
-
-      this.$router.push("/", () => {});
+      this.registerForm.password = "";
+      this.registerForm.password_confirmation = "";
     },
+    clearError: function () {
+      this.$store.commit("auth/setRegisterErrorMessages", null);
+    },
+  },
+  created() {
+    this.clearError();
   },
 };
 </script>
