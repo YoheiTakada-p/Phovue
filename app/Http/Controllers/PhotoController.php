@@ -31,8 +31,8 @@ class PhotoController extends Controller
         \DB::beginTransaction();
 
         try {
-            Auth::user()->photos()->save($photo);
-            DB::commit();
+            \Auth::user()->photos()->save($photo);
+            \DB::commit();
         } catch (\Exception $exception) {
             \DB::rollback();
             \Storage::cloud()->delete($photo->filename);

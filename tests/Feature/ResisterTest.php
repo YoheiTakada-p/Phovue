@@ -67,7 +67,6 @@ class ResisterTest extends TestCase
         for ($i = 0; $i < 256; $i++) {
             $mozi .= 'a';
         }
-        echo strlen($mozi);
 
         $response = $this->json('POST', route('register', [
             'name' => $mozi,

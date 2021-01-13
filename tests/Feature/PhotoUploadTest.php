@@ -33,5 +33,8 @@ class PhotoUploadTest extends TestCase
             ]);
 
         $response->assertStatus(201);
+
+        $photo = Photo::first();
+        \Log::debug($response->content());
     }
 }
