@@ -1,5 +1,5 @@
 const state = {
-  user: null
+  user: null,
 }
 
 const getters = {
@@ -11,9 +11,9 @@ const getters = {
 }
 
 const mutations = {
-  setUser(state, user) {
-    state.user = user
-  }
+  setUser: function (state, data) {
+    state.user = data
+  },
 }
 
 const actions = {
@@ -24,8 +24,14 @@ const actions = {
   },
   async login(context, data) {
     console.log('ログイン')
-    const response = await axios.post('/api/login', data)
-    context.commit('setUser', response.data)
+    const response = await axios.post('/api/login', data).catch(error => error.response)
+
+    if (response.status === 200) {
+      context.commit('setUser', response.data)
+      return false
+    }
+
+    context.commit('error/setAlert', true, { root: true })
   },
   async logout(context, data) {
     console.log('ログアウト')

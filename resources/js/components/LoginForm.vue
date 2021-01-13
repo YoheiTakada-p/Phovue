@@ -53,8 +53,6 @@ export default {
   methods: {
     login: async function () {
       await this.$store.dispatch("auth/login", this.loginForm);
-
-      this.$router.push("/", () => {});
     },
   },
 };
