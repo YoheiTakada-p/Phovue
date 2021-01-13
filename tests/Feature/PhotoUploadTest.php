@@ -8,6 +8,7 @@ use Tests\TestCase;
 //add
 use App\User;
 use App\Photo;
+use Illuminate\Http\UploadedFile;
 
 class PhotoUploadTest extends TestCase
 {
@@ -24,9 +25,13 @@ class PhotoUploadTest extends TestCase
      */
     public function 写真を投稿できる()
     {
-        $response = $this->actingAs($this->user)
-            ->json('POST', route('photo.post'));
+        \Storage::fake('s3');
 
-        $response->assertStatus(200);
+        $response = $this->actingAs($this->user)
+            ->json('POST', route('photo.post'), [
+                'photo' => UploadedFile::fake()->image('photo.jpg')
+            ]);
+
+        $response->assertStatus(201);
     }
 }
