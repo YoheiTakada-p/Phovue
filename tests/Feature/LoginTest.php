@@ -34,4 +34,16 @@ class LoginTest extends TestCase
         //レスポンスが認証されているか
         $this->assertAuthenticatedAs($this->user);
     }
+    /**
+     * @test
+     */
+    public function ログイン_validationTest_入力なし()
+    {
+        $response = $this->json('POST', route('login', [
+            'email' => '',
+            'name' => ''
+        ]));
+
+        $response->assertStatus(422);
+    }
 }

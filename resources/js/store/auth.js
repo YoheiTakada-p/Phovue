@@ -54,7 +54,6 @@ const actions = {
     }
 
     if (response.status === 422) {
-      console.log(response.data.errors)
       context.commit('setLoginErrorMessages', response.data.errors)
     } else {
       context.commit('error/setAlert', true, { root: true })

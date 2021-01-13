@@ -1959,7 +1959,7 @@ __webpack_require__.r(__webpack_exports__);
     errorAlert: {
       handler: function handler(value) {
         if (value) {
-          alert(value + ":システムエラーが発生しました");
+          alert("500:システムエラーが発生しました");
           this.$store.commit("error/setAlert", null);
         }
       },
@@ -56770,7 +56770,6 @@ var actions = {
 
             case 7:
               if (response.status === 422) {
-                console.log(response.data.errors);
                 context.commit('setLoginErrorMessages', response.data.errors);
               } else {
                 context.commit('error/setAlert', true, {
