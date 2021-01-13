@@ -1,6 +1,6 @@
 import App from './App.vue';
 import router from './router';
-import store from './store'
+import store from './store';
 
 
 /**
@@ -30,10 +30,16 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-    router,
-    store,
-    components: { App },
-    template: '<App />'
-});
+const createApp = async function () {
+    await store.dispatch('auth/currentUser');
+
+    new Vue({
+        el: '#app',
+        router,
+        store,
+        components: { App },
+        template: '<App />'
+    });
+}
+
+createApp();

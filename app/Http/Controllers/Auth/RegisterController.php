@@ -78,7 +78,7 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        \Log::debug($user);
+        // \Log::debug($user);
         return $user;
     }
 }

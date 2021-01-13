@@ -31,6 +31,13 @@ const actions = {
     console.log('ログアウト')
     const response = await axios.post('/api/logout')
     context.commit('setUser', null)
+  },
+  async currentUser(context) {
+    console.log('ユーザー取得')
+    const response = await axios.get('/api/user')
+    //ユーザー情報がない場合は空文字が送られてくるため、nullに変換する
+    const user = response.data || null
+    context.commit('setUser', user)
   }
 }
 
