@@ -24,6 +24,8 @@ Route::post('/register', 'Auth\RegisterController@register')->name('register');
 Route::get('/user', function () {
     return \Auth::user();
 })->name('user');
+//写真を投稿する
+Route::post('/photo', 'PhotoController@post')->name('photo.post');
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
