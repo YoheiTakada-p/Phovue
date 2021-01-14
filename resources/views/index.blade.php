@@ -38,6 +38,12 @@
         .photo-form {
             min-width: 25rem;
         }
+
+        .output {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
     </style>
 
 </head>
