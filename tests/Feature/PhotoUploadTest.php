@@ -33,8 +33,46 @@ class PhotoUploadTest extends TestCase
             ]);
 
         $response->assertStatus(201);
+        \Log::debug($response->content());
 
         $photo = Photo::first();
-        \Log::debug($response->content());
+
+        \Storage::cloud()->assertExists($photo->filename);
+    }
+    /**
+     * @test
+     */
+    public function DBエラーの場合は写真を保存しない()
+    {
+        //DBを削除
+        \Schema::drop('photos');
+
+        \Storage::fake('s3');
+
+        $response = $this->actingAs($this->user)
+            ->json('POST', route('photo.post'), [
+                'photo' => UploadedFile::fake()->image('photo.jpg')
+            ]);
+
+        $response->assertStatus(500);
+
+        $this->assertEquals(0, count(\Storage::cloud()->files()));
+    }
+    /**
+     * @test
+     */
+    public function ファイル保存失敗の場合はDBに保存しない()
+    {
+        //ストレージをモックする
+        \Storage::shouldReceive('cloud')->once()->andReturnNull();
+
+        $response = $this->actingAs($this->user)
+            ->json('POST', route('photo.post'), [
+                'photo' => UploadedFile::fake()->image('photo.jpg')
+            ]);
+
+        $response->assertStatus(500);
+
+        $this->assertEmpty(Photo::all());
     }
 }
