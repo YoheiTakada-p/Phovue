@@ -1,7 +1,11 @@
 <template>
   <div class="container mt-3">
     <div class="card-columns">
-      <PhotoCard />
+      <PhotoCard
+        v-for="photo in photos"
+        v-bind:key="photo.id"
+        v-bind:item="photo"
+      />
     </div>
   </div>
 </template>
@@ -15,8 +19,30 @@ export default {
   },
   data: function () {
     return {
-      item: null,
+      photos: [],
     };
+  },
+  methods: {
+    fetchPhotos: async function () {
+      console.log("写真取得");
+      const response = await axios
+        .get("/api/photo")
+        .catch((error) => error.response);
+
+      if (response.status === 200) {
+        this.photos = response.data;
+      } else {
+        this.$store.commit("error/setCode", response.status);
+      }
+    },
+  },
+  watch: {
+    $route: {
+      handler: async function () {
+        await this.fetchPhotos();
+      },
+      immediate: true,
+    },
   },
 };
 </script>

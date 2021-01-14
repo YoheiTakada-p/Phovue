@@ -26,6 +26,8 @@ Route::get('/user', function () {
 })->name('user');
 //写真を投稿する
 Route::post('/photo', 'PhotoController@post')->name('photo.post');
+//写真一覧を取得する
+Route::get('/photo', 'PhotoController@get')->name('photo.get');
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();

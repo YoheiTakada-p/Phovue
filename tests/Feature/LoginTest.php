@@ -32,6 +32,7 @@ class LoginTest extends TestCase
             //レスポンスが指定したjsonデータを持っているか
             ->assertJson(['name' => $this->user->name]);
         //レスポンスが認証されているか
+        //レスポンスが認証されているか
         $this->assertAuthenticatedAs($this->user);
     }
     /**

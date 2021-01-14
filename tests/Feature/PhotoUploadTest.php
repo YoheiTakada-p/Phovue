@@ -33,7 +33,7 @@ class PhotoUploadTest extends TestCase
             ]);
 
         $response->assertStatus(201);
-        \Log::debug($response->content());
+        \Log::debug(UploadedFile::fake()->image('photo.jpg'));
 
         $photo = Photo::first();
 

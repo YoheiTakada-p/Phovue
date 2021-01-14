@@ -28,7 +28,6 @@ export default {
     errorCode: {
       handler: function (value) {
         if (value === 500) {
-          alert("システムエラーが発生しました");
           this.$router.push("/500");
           this.$store.commit("error/setCode", null);
         }

@@ -12,7 +12,7 @@ class PhotoController extends Controller
     public function __construct()
     {
         //認証が必要
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['get']);
     }
 
     public function post(StorePhoto $request)
@@ -40,5 +40,12 @@ class PhotoController extends Controller
         }
 
         return response($photo, 201);
+    }
+
+    public function get()
+    {
+        $photos = Photo::with(['owner'])->orderBy('created_at', 'desc')->get();
+
+        return $photos;
     }
 }
