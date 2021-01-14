@@ -12,7 +12,13 @@
       Photo
     </a>
     <div class="dropdown-menu photo-form" aria-labelledby="navbarDropdown">
-      <form class="form-group my-2 mx-2 my-lg-0" v-on:submit.prevent="upload">
+      <Loader v-show="loading">Sending your photo...</Loader>
+      <form
+        class="form-group my-2 mx-2 my-lg-0"
+        v-on:submit.prevent="upload"
+        v-show="!loading"
+      >
+        <Message />
         <div class="form-group">
           <label>Photo select</label>
           <input type="file" class="form-control" v-on:change="onFileChange" />
@@ -31,11 +37,19 @@
 </template>
 
 <script>
+import Loader from "./Loader";
+import Message from "./Message";
+
 export default {
+  components: {
+    Loader,
+    Message,
+  },
   data: function () {
     return {
       preview: null,
       photo: null,
+      loading: false,
     };
   },
   methods: {
@@ -65,17 +79,33 @@ export default {
     },
     upload: async function () {
       if (!this.preview) {
-        //ファイル選択してないですよerror
+        alert("ファイルを選択してね！");
         return false;
       }
-      console.log("submit!");
+      //loading components on
+      this.loading = true;
+
       const formData = new FormData();
       formData.append("photo", this.photo);
 
-      const response = await axios.post("/api/photo", formData);
-      console.log("upload!");
+      const response = await axios
+        .post("/api/photo", formData)
+        .catch((error) => error.response);
 
+      //loading components off
       this.reset();
+      this.loading = false;
+
+      if (response.status === 201) {
+        console.log("upload!");
+        this.$store.commit("message/setContent", {
+          content: "投稿できたよ！",
+          timeout: 6000,
+        });
+      } else {
+        console.log("error!");
+        this.$store.commit("error/setAlert", true);
+      }
     },
     reset: function () {
       this.preview = null;

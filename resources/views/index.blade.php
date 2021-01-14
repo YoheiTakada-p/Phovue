@@ -31,6 +31,10 @@
             background-color: #ffc0cb;
         }
 
+        .bg-ok {
+            background-color: #adff2f;
+        }
+
         .form-size {
             min-width: 25rem
         }
