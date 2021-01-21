@@ -36,11 +36,11 @@
         }
 
         .form-size {
-            min-width: 25rem
+            min-width: 20rem
         }
 
         .photo-form {
-            min-width: 25rem;
+            min-width: 20rem;
         }
 
         .output {
