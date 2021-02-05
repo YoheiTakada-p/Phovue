@@ -9,10 +9,10 @@
       aria-haspopup="true"
       aria-expanded="false"
     >
-      Photo
+      投稿
     </a>
     <div class="dropdown-menu photo-form" aria-labelledby="navbarDropdown">
-      <Loader v-show="loading">Sending your photo...</Loader>
+      <Loader v-show="loading">投稿中･･･</Loader>
       <form
         class="form-group my-2 mx-2 my-lg-0"
         v-on:submit.prevent="upload"
@@ -20,17 +20,17 @@
       >
         <Message />
         <div class="form-group">
-          <label>Photo select</label>
+          <label>写真を選んでね</label>
           <input type="file" class="form-control" v-on:change="onFileChange" />
           <output v-if="preview">
             <img class="output py-2" :src="preview" alt="" />
           </output>
         </div>
         <div class="form-group">
-          <label for="Textarea1">Comment</label>
+          <label for="Textarea1">コメント</label>
           <textarea class="form-control" id="Textarea1" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">投稿</button>
       </form>
     </div>
   </li>

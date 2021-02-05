@@ -4,7 +4,7 @@
       <PhotoCard
         v-for="photo in photos"
         v-bind:key="photo.id"
-        v-bind:item="photo"
+        v-bind:photo="photo"
       />
     </div>
   </div>

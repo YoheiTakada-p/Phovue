@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <span>
-      <slot>Loading...</slot>
+      <slot>ロード中･･･</slot>
     </span>
   </div>
 </template>

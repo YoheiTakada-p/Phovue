@@ -9,7 +9,7 @@
       aria-haspopup="true"
       aria-expanded="false"
     >
-      Register
+      登録
     </a>
     <div class="dropdown-menu form-size" aria-labelledby="navbarDropdown">
       <form class="form-group my-2 mx-2 my-lg-0" v-on:submit.prevent="register">
@@ -28,50 +28,47 @@
           </ul>
         </div>
         <div class="form-group">
-          <label>Name</label>
+          <label>名前</label>
           <input
             type="text"
             class="form-control"
-            placeholder="Enter name"
+            placeholder="名前を入力してね"
             v-bind:value="registerForm.name"
             v-on:input="registerForm.name = $event.target.value"
             required
           />
         </div>
         <div class="form-group">
-          <label>Email address</label>
+          <label>メールアドレス</label>
           <input
             type="email"
             class="form-control"
-            placeholder="Enter email"
+            placeholder="メールアドレスを入力してね"
             v-model="registerForm.email"
             required
           />
-          <small class="form-text text-muted"
-            >We'll never share your email with anyone else.</small
-          >
         </div>
         <div class="form-group">
-          <label>Password</label>
+          <label>パスワード</label>
           <input
             type="password"
             class="form-control"
-            placeholder="Password"
+            placeholder="パスワードを入力してね"
             v-model="registerForm.password"
             required
           />
         </div>
         <div class="form-group">
-          <label>Password confirm</label>
+          <label>確認用パスワード</label>
           <input
             type="password"
             class="form-control"
-            placeholder="Password confirm"
+            placeholder="同じパスワードを入力してね"
             v-model="registerForm.password_confirmation"
             required
           />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">登録</button>
       </form>
     </div>
   </li>

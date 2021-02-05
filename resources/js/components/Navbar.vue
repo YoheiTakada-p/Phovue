@@ -2,10 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <router-link class="navbar-brand" to="/">phovue</router-link>
     <span class="navbar-text" v-show="isLogin == true"
-      >ようこそ、{{ username }}！</span
-    >
-    <span class="navbar-text" v-show="isLogin == false"
-      >ログインして写真を投稿してみよう！</span
+      >ようこそ、{{ username }}</span
     >
     <button
       class="navbar-toggler"

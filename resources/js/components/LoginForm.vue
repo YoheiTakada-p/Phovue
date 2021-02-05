@@ -9,7 +9,7 @@
       aria-haspopup="true"
       aria-expanded="false"
     >
-      Login
+      ログイン
     </a>
     <div class="dropdown-menu form-size" aria-labelledby="navbarDropdown">
       <form class="form-group my-2 mx-2 my-lg-0" v-on:submit.prevent="login">
@@ -25,29 +25,26 @@
           </ul>
         </div>
         <div class="form-group">
-          <label>Email address</label>
+          <label>メールアドレス</label>
           <input
             type="email"
             class="form-control"
-            placeholder="Enter email"
+            placeholder="メールアドレスを入力してね"
             v-model="loginForm.email"
             required
           />
-          <small class="form-text text-muted"
-            >We'll never share your email with anyone else.</small
-          >
         </div>
         <div class="form-group">
-          <label>Password</label>
+          <label>パスワード</label>
           <input
             type="password"
             class="form-control"
-            placeholder="Password"
+            placeholder="パスワードを入力してね"
             v-model="loginForm.password"
             required
           />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">送信</button>
       </form>
     </div>
   </li>

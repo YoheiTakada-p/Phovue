@@ -2038,9 +2038,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2217,9 +2214,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -2252,6 +2246,35 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2291,10 +2314,88 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    item: {
+    photo: {
       type: Object,
       required: true
     }
+  },
+  computed: {
+    isLogin: function isLogin() {
+      return this.$store.getters["auth/check"];
+    }
+  },
+  methods: {
+    alert: function (_alert) {
+      function alert() {
+        return _alert.apply(this, arguments);
+      }
+
+      alert.toString = function () {
+        return _alert.toString();
+      };
+
+      return alert;
+    }(function () {
+      return alert("いいね機能はログインが必要だよ！");
+    }),
+    like: function () {
+      var _like = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id) {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                console.log("いいねする");
+                _context.next = 3;
+                return axios.put("/api/photo/" + id + "/like");
+
+              case 3:
+                response = _context.sent;
+                console.log("いいねできた");
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function like(_x) {
+        return _like.apply(this, arguments);
+      }
+
+      return like;
+    }(),
+    unlike: function () {
+      var _unlike = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(id) {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                console.log("いいね削除する");
+                _context2.next = 3;
+                return axios["delete"]("/api/photo/" + id + "/like");
+
+              case 3:
+                response = _context2.sent;
+                console.log("いいね消せた");
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function unlike(_x2) {
+        return _unlike.apply(this, arguments);
+      }
+
+      return unlike;
+    }()
   }
 });
 
@@ -2480,9 +2581,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
 //
 //
 //
@@ -39102,7 +39200,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "text-center" }, [
-    _c("span", [_vm._t("default", [_vm._v("Loading...")])], 2)
+    _c("span", [_vm._t("default", [_vm._v("ロード中･･･")])], 2)
   ])
 }
 var staticRenderFns = []
@@ -39141,7 +39239,7 @@ var render = function() {
           "aria-expanded": "false"
         }
       },
-      [_vm._v("\n    Login\n  ")]
+      [_vm._v("\n    ログイン\n  ")]
     ),
     _vm._v(" "),
     _c(
@@ -39195,7 +39293,7 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Email address")]),
+              _c("label", [_vm._v("メールアドレス")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -39209,7 +39307,7 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "email",
-                  placeholder: "Enter email",
+                  placeholder: "メールアドレスを入力してね",
                   required: ""
                 },
                 domProps: { value: _vm.loginForm.email },
@@ -39221,15 +39319,11 @@ var render = function() {
                     _vm.$set(_vm.loginForm, "email", $event.target.value)
                   }
                 }
-              }),
-              _vm._v(" "),
-              _c("small", { staticClass: "form-text text-muted" }, [
-                _vm._v("We'll never share your email with anyone else.")
-              ])
+              })
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Password")]),
+              _c("label", [_vm._v("パスワード")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -39243,7 +39337,7 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "password",
-                  placeholder: "Password",
+                  placeholder: "パスワードを入力してね",
                   required: ""
                 },
                 domProps: { value: _vm.loginForm.password },
@@ -39261,7 +39355,7 @@ var render = function() {
             _c(
               "button",
               { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Submit")]
+              [_vm._v("送信")]
             )
           ]
         )
@@ -39305,7 +39399,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("Logout")]
+        [_vm._v("ログアウト")]
       )
     ])
   ])
@@ -39392,23 +39486,7 @@ var render = function() {
           ],
           staticClass: "navbar-text"
         },
-        [_vm._v("ようこそ、" + _vm._s(_vm.username) + "！")]
-      ),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.isLogin == false,
-              expression: "isLogin == false"
-            }
-          ],
-          staticClass: "navbar-text"
-        },
-        [_vm._v("ログインして写真を投稿してみよう！")]
+        [_vm._v("ようこそ、" + _vm._s(_vm.username))]
       ),
       _vm._v(" "),
       _vm._m(0),
@@ -39487,17 +39565,17 @@ var render = function() {
     _c("div", { staticClass: "position-relative" }, [
       _c("img", {
         staticClass: "card-img",
-        attrs: { alt: "...", src: _vm.item.url }
+        attrs: { alt: "...", src: _vm.photo.url }
       }),
       _vm._v(" "),
       _c("a", {
         staticClass: "card-img-overlay",
         attrs: {
           "data-toggle": "collapse",
-          href: "#collapse-comment-" + _vm.item.id,
+          href: "#collapse-comment-" + _vm.photo.id,
           role: "button",
           "aria-expanded": "false",
-          "aria-controls": "collapse-comment-" + _vm.item.id
+          "aria-controls": "collapse-comment-" + _vm.photo.id
         }
       })
     ]),
@@ -39510,24 +39588,84 @@ var render = function() {
           "div",
           {
             staticClass: "collapse",
-            attrs: { id: "collapse-comment-" + _vm.item.id }
+            attrs: { id: "collapse-comment-" + _vm.photo.id }
           },
           [_vm._m(0)]
         ),
         _vm._v(" "),
         _c("div", { staticClass: "d-flex justify-content-between" }, [
           _c("span", { staticClass: "my-auto" }, [
-            _vm._v(_vm._s(_vm.item.owner.name))
+            _vm._v(_vm._s(_vm.photo.owner.name))
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._m(1),
+            _vm.isLogin == false
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-gray",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.alert($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fas fa-heart",
+                      staticStyle: { color: "white" }
+                    }),
+                    _vm._v(_vm._s(_vm.photo.like_count) + "\n        ")
+                  ]
+                )
+              : _vm.photo.liked_by_user == true
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-gray",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.unlike(_vm.photo.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fas fa-heart",
+                      staticStyle: { color: "pink" }
+                    }),
+                    _vm._v(_vm._s(_vm.photo.like_count) + "\n        ")
+                  ]
+                )
+              : _vm.photo.liked_by_user == false
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-gray",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.like(_vm.photo.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fas fa-heart",
+                      staticStyle: { color: "white" }
+                    }),
+                    _vm._v(_vm._s(_vm.photo.like_count) + "\n        ")
+                  ]
+                )
+              : _vm._e(),
             _vm._v(" "),
             _c(
               "a",
               {
                 staticClass: "btn btn-sm btn-gray",
-                attrs: { href: "/photos/" + _vm.item.id + "/download" }
+                attrs: { href: "/photos/" + _vm.photo.id + "/download" }
               },
               [
                 _c("i", {
@@ -39549,15 +39687,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", [
       _c("p", { staticClass: "text-justify" }, [_vm._v("サンプルコメント")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-sm btn-gray" }, [
-      _c("i", { staticClass: "fas fa-heart", staticStyle: { color: "pink" } }),
-      _vm._v("1\n        ")
     ])
   }
 ]
@@ -39596,7 +39725,7 @@ var render = function() {
           "aria-expanded": "false"
         }
       },
-      [_vm._v("\n    Photo\n  ")]
+      [_vm._v("\n    投稿\n  ")]
     ),
     _vm._v(" "),
     _c(
@@ -39618,7 +39747,7 @@ var render = function() {
               }
             ]
           },
-          [_vm._v("Sending your photo...")]
+          [_vm._v("投稿中･･･")]
         ),
         _vm._v(" "),
         _c(
@@ -39644,7 +39773,7 @@ var render = function() {
             _c("Message"),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Photo select")]),
+              _c("label", [_vm._v("写真を選んでね")]),
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control",
@@ -39667,7 +39796,7 @@ var render = function() {
             _c(
               "button",
               { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Submit")]
+              [_vm._v("投稿")]
             )
           ],
           1
@@ -39683,7 +39812,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "Textarea1" } }, [_vm._v("Comment")]),
+      _c("label", { attrs: { for: "Textarea1" } }, [_vm._v("コメント")]),
       _vm._v(" "),
       _c("textarea", {
         staticClass: "form-control",
@@ -39727,7 +39856,7 @@ var render = function() {
           "aria-expanded": "false"
         }
       },
-      [_vm._v("\n    Register\n  ")]
+      [_vm._v("\n    登録\n  ")]
     ),
     _vm._v(" "),
     _c(
@@ -39791,13 +39920,13 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Name")]),
+              _c("label", [_vm._v("名前")]),
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control",
                 attrs: {
                   type: "text",
-                  placeholder: "Enter name",
+                  placeholder: "名前を入力してね",
                   required: ""
                 },
                 domProps: { value: _vm.registerForm.name },
@@ -39810,7 +39939,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Email address")]),
+              _c("label", [_vm._v("メールアドレス")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -39824,7 +39953,7 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "email",
-                  placeholder: "Enter email",
+                  placeholder: "メールアドレスを入力してね",
                   required: ""
                 },
                 domProps: { value: _vm.registerForm.email },
@@ -39836,15 +39965,11 @@ var render = function() {
                     _vm.$set(_vm.registerForm, "email", $event.target.value)
                   }
                 }
-              }),
-              _vm._v(" "),
-              _c("small", { staticClass: "form-text text-muted" }, [
-                _vm._v("We'll never share your email with anyone else.")
-              ])
+              })
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Password")]),
+              _c("label", [_vm._v("パスワード")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -39858,7 +39983,7 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "password",
-                  placeholder: "Password",
+                  placeholder: "パスワードを入力してね",
                   required: ""
                 },
                 domProps: { value: _vm.registerForm.password },
@@ -39874,7 +39999,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Password confirm")]),
+              _c("label", [_vm._v("確認用パスワード")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -39888,7 +40013,7 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "password",
-                  placeholder: "Password confirm",
+                  placeholder: "同じパスワードを入力してね",
                   required: ""
                 },
                 domProps: { value: _vm.registerForm.password_confirmation },
@@ -39910,7 +40035,7 @@ var render = function() {
             _c(
               "button",
               { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Submit")]
+              [_vm._v("登録")]
             )
           ]
         )
@@ -39945,7 +40070,7 @@ var render = function() {
       "div",
       { staticClass: "card-columns" },
       _vm._l(_vm.photos, function(photo) {
-        return _c("PhotoCard", { key: photo.id, attrs: { item: photo } })
+        return _c("PhotoCard", { key: photo.id, attrs: { photo: photo } })
       }),
       1
     )
