@@ -61,4 +61,15 @@ class PhotoController extends Controller
 
         return \Storage::cloud()->download($photo->filename, $name);
     }
+
+    public function like(String $id)
+    {
+        $photo = Photo::find($id);
+
+        $photo->likes()->attach(\Auth::user()->id);
+
+        \Log::debug($photo);
+
+        return response(200);
+    }
 }

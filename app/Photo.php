@@ -11,12 +11,12 @@ class Photo extends Model
 
     //取得したJSONに追加する
     protected $appends = [
-        'url'
+        'url', 'like_count'
     ];
 
     //JSONに含める属性
     protected $visible = [
-        'id', 'url', 'owner',
+        'id', 'url', 'owner', 'like_count'
     ];
 
     public function __construct(array $attributes = [])
@@ -45,11 +45,19 @@ class Photo extends Model
     }
 
     /**
-     * アクセサ -url
+     * アクセサ - url
      */
     public function getUrlAttribute()
     {
         return \Storage::cloud()->url($this->attributes['filename']);
+    }
+
+    /**
+     * アクセサ　- like_count
+     */
+    public function getLikeCountAttribute()
+    {
+        return $this->likes->count();
     }
 
     /**
