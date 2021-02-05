@@ -27,7 +27,7 @@ class PhotoGetTest extends TestCase
         // \Log::debug($response->content());
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'like_count' => '0',
+                'like_count' => 0,
                 'liked_by_user' => false
             ]);
     }
