@@ -6,17 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {
+    //IDが自動増分しない
+    public $incrementing = false;
+
     //プライマリキーの型
     protected $keyType = 'string';
 
     //取得したJSONに追加する
     protected $appends = [
-        'url', 'like_count'
+        'url', 'like_count', 'liked_by_user'
     ];
 
     //JSONに含める属性
     protected $visible = [
-        'id', 'url', 'owner', 'like_count'
+        'id', 'url', 'owner', 'like_count', 'liked_by_user'
     ];
 
     public function __construct(array $attributes = [])
@@ -53,11 +56,23 @@ class Photo extends Model
     }
 
     /**
-     * アクセサ　- like_count
+     * アクセサ - like_count
      */
     public function getLikeCountAttribute()
     {
         return $this->likes->count();
+    }
+
+    /**
+     * アクセサ - liked_by_user
+     */
+    public function getLikedByUserAttribute()
+    {
+        if ($this->likes->contains(\Auth::id())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
