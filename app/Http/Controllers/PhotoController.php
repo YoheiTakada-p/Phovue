@@ -12,7 +12,7 @@ class PhotoController extends Controller
     public function __construct()
     {
         //認証が必要
-        $this->middleware('auth')->except(['get']);
+        $this->middleware('auth')->except(['get', 'download']);
     }
 
     public function post(StorePhoto $request)
@@ -47,5 +47,18 @@ class PhotoController extends Controller
         $photos = Photo::with(['owner'])->orderBy('created_at', 'desc')->get();
 
         return $photos;
+    }
+
+    public function download(Photo $photo)
+    {
+        // 写真の存在チェック
+        if (!\Storage::cloud()->exists($photo->filename)) {
+            abort(404);
+        }
+
+        //ファイル名
+        $name = $photo->filename;
+
+        return \Storage::cloud()->download($photo->filename, $name);
     }
 }

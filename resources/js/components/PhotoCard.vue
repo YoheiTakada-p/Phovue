@@ -23,7 +23,10 @@
           <button class="btn btn-sm btn-gray">
             <i class="fas fa-heart" style="color: pink"></i>1
           </button>
-          <a href="#" class="btn btn-sm btn-gray">
+          <a
+            :href="'/photos/' + item.id + '/download'"
+            class="btn btn-sm btn-gray"
+          >
             <i class="fas fa-download" style="color: white"></i>
           </a>
         </div>

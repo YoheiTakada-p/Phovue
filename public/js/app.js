@@ -2286,6 +2286,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
@@ -2659,7 +2662,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log("写真取得");
+                console.log("写真取得dekiru");
                 _context.next = 3;
                 return axios.get("/api/photo")["catch"](function (error) {
                   return error.response;
@@ -39517,7 +39520,23 @@ var render = function() {
             _vm._v(_vm._s(_vm.item.owner.name))
           ]),
           _vm._v(" "),
-          _vm._m(1)
+          _c("div", [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-sm btn-gray",
+                attrs: { href: "/photos/" + _vm.item.id + "/download" }
+              },
+              [
+                _c("i", {
+                  staticClass: "fas fa-download",
+                  staticStyle: { color: "white" }
+                })
+              ]
+            )
+          ])
         ])
       ]
     )
@@ -39536,21 +39555,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("button", { staticClass: "btn btn-sm btn-gray" }, [
-        _c("i", {
-          staticClass: "fas fa-heart",
-          staticStyle: { color: "pink" }
-        }),
-        _vm._v("1\n        ")
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "btn btn-sm btn-gray", attrs: { href: "#" } }, [
-        _c("i", {
-          staticClass: "fas fa-download",
-          staticStyle: { color: "white" }
-        })
-      ])
+    return _c("button", { staticClass: "btn btn-sm btn-gray" }, [
+      _c("i", { staticClass: "fas fa-heart", staticStyle: { color: "pink" } }),
+      _vm._v("1\n        ")
     ])
   }
 ]
