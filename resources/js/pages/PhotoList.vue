@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     fetchPhotos: async function () {
-      console.log("写真取得dekiru");
+      console.log("写真取得");
       const response = await axios
         .get("/api/photo")
         .catch((error) => error.response);

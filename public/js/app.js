@@ -2662,7 +2662,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log("写真取得dekiru");
+                console.log("写真取得");
                 _context.next = 3;
                 return axios.get("/api/photo")["catch"](function (error) {
                   return error.response;
