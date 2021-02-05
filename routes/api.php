@@ -28,6 +28,10 @@ Route::get('/user', function () {
 Route::post('/photo', 'PhotoController@post')->name('photo.post');
 //写真一覧を取得する
 Route::get('/photo', 'PhotoController@get')->name('photo.get');
+//いいねをする
+Route::put('photo/{id}/like', 'PhotoController@like')->name('photo.like');
+//いいねを解除する
+Route::delete('photo/{id}/like', 'PhotoController@unlike')->name('photo.unlike');
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();

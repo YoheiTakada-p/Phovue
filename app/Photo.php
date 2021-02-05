@@ -57,6 +57,16 @@ class Photo extends Model
      */
     public function owner()
     {
+        //リレーションのメソッド名を任意に設定する場合、サフィックスは機能しない
         return $this->belongsTo('App\User', 'user_id', 'id', 'users');
+    }
+
+    /**
+     * リレーションシップ - likes 中間テーブル
+     */
+    public function likes()
+    {
+        //第二引数は結合テーブル名のオーバーライド
+        return $this->belongsToMany('App\User', 'likes');
     }
 }
