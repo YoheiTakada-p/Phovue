@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 //add
 use App\Http\Requests\StorePhoto;
 use App\Photo;
+use App\Comment;
 
 class PhotoController extends Controller
 {
@@ -21,6 +22,8 @@ class PhotoController extends Controller
 
         $photo = new Photo();
 
+        $comment = new Comment(['comment' => $request->comment]);
+
         $photo->filename = $photo->id . '.' . $extension;
 
         //s3にファイルを保存する
@@ -32,6 +35,7 @@ class PhotoController extends Controller
 
         try {
             \Auth::user()->photos()->save($photo);
+            $photo->comment()->save($comment);
             \DB::commit();
         } catch (\Exception $exception) {
             \DB::rollback();

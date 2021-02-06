@@ -14,12 +14,12 @@ class Photo extends Model
 
     //取得したJSONに追加する
     protected $appends = [
-        'url', 'like_count', 'liked_by_user'
+        'url', 'like_count', 'liked_by_user', 'user_comment'
     ];
 
     //JSONに含める属性
     protected $visible = [
-        'id', 'url', 'owner', 'like_count', 'liked_by_user'
+        'id', 'url', 'owner', 'like_count', 'liked_by_user', 'user_comment'
     ];
 
     public function __construct(array $attributes = [])
@@ -76,6 +76,14 @@ class Photo extends Model
     }
 
     /**
+     * アクセサ - user_comment
+     */
+    public function getUserCommentAttribute()
+    {
+        return $this->comment->comment;
+    }
+
+    /**
      * リレーションシップ - users
      */
     public function owner()
@@ -94,10 +102,10 @@ class Photo extends Model
     }
 
     /**
-     * リレーションシップ - comments
+     * リレーションシップ - comment
      */
-    public function comments()
+    public function comment()
     {
-        return $this->hasMany('App\Comments');
+        return $this->hasOne('App\Comment');
     }
 }

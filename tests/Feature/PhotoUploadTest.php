@@ -23,7 +23,7 @@ class PhotoUploadTest extends TestCase
     /**
      *@test
      */
-    public function 写真を投稿できる()
+    public function 写真とコメントを投稿できる()
     {
         \Storage::fake('s3');
 
@@ -33,9 +33,10 @@ class PhotoUploadTest extends TestCase
                 'comment' => 'testComment'
             ]);
 
+        \Log::debug(Photo::with(['comment'])->first());
         $response->assertStatus(201)
             ->assertJsonFragment([
-                'comment' => 'testComment'
+                'user_comment' => 'testComment'
             ]);
 
         $photo = Photo::first();
