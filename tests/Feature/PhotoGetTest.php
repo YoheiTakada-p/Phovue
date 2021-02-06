@@ -22,9 +22,10 @@ class PhotoGetTest extends TestCase
 
         $response = $this->json('GET', route('photo.get'));
 
-        \Log::debug($response->content());
+        // \Log::debug($response->content());
 
         $response->assertStatus(200)
+            ->assertJsonCount(5)
             ->assertJsonFragment([
                 'like_count' => 0,
                 'liked_by_user' => false,

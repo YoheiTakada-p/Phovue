@@ -8,6 +8,7 @@ use Tests\TestCase;
 //add
 use App\User;
 use App\Photo;
+use App\Comment;
 use Illuminate\Http\UploadedFile;
 
 class PhotoUploadTest extends TestCase
@@ -20,6 +21,7 @@ class PhotoUploadTest extends TestCase
 
         $this->user = factory(User::class)->create();
     }
+
     /**
      *@test
      */
@@ -33,7 +35,6 @@ class PhotoUploadTest extends TestCase
                 'comment' => 'testComment'
             ]);
 
-        \Log::debug(Photo::with(['comment'])->first());
         $response->assertStatus(201)
             ->assertJsonFragment([
                 'user_comment' => 'testComment'
@@ -43,6 +44,7 @@ class PhotoUploadTest extends TestCase
 
         \Storage::cloud()->assertExists($photo->filename);
     }
+
     /**
      * @test
      */
@@ -55,13 +57,15 @@ class PhotoUploadTest extends TestCase
 
         $response = $this->actingAs($this->user)
             ->json('POST', route('photo.post'), [
-                'photo' => UploadedFile::fake()->image('photo.jpg')
+                'photo' => UploadedFile::fake()->image('photo.jpg'),
+                'comment' => 'testComment'
             ]);
 
         $response->assertStatus(500);
 
         $this->assertEquals(0, count(\Storage::cloud()->files()));
     }
+
     /**
      * @test
      */
@@ -72,11 +76,13 @@ class PhotoUploadTest extends TestCase
 
         $response = $this->actingAs($this->user)
             ->json('POST', route('photo.post'), [
-                'photo' => UploadedFile::fake()->image('photo.jpg')
+                'photo' => UploadedFile::fake()->image('photo.jpg'),
+                'comment' => 'testComment'
             ]);
 
         $response->assertStatus(500);
 
         $this->assertEmpty(Photo::all());
+        $this->assertEmpty(Comment::all());
     }
 }

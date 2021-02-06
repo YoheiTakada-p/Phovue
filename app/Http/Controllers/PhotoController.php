@@ -55,11 +55,6 @@ class PhotoController extends Controller
 
     public function download(Photo $photo)
     {
-        // 写真の存在チェック
-        if (!\Storage::cloud()->exists($photo->filename)) {
-            abort(404);
-        }
-
         //ファイル名
         $name = $photo->filename;
 
@@ -80,7 +75,7 @@ class PhotoController extends Controller
     {
         $photo = Photo::find($id);
 
-        $photo->likes()->detach(\Auth::user()->id);
+        $photo->likes()->detach(\Auth::id());
 
         return response(200);
     }

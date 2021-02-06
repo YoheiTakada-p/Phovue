@@ -18,6 +18,7 @@ class LoginTest extends TestCase
 
         $this->user = factory(User::class)->create();
     }
+
     /**
      * @test
      */
@@ -29,22 +30,8 @@ class LoginTest extends TestCase
         ]));
 
         $response->assertStatus(200)
-            //レスポンスが指定したjsonデータを持っているか
             ->assertJson(['name' => $this->user->name]);
-        //レスポンスが認証されているか
-        //レスポンスが認証されているか
-        $this->assertAuthenticatedAs($this->user);
-    }
-    /**
-     * @test
-     */
-    public function ログイン_validationTest_入力なし()
-    {
-        $response = $this->json('POST', route('login', [
-            'email' => '',
-            'name' => ''
-        ]));
 
-        $response->assertStatus(422);
+        $this->assertAuthenticatedAs($this->user);
     }
 }

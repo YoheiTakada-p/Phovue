@@ -19,15 +19,17 @@ class UserTest extends TestCase
 
         $this->user = factory(User::class)->create();
     }
+
     /**
      * @test
      */
     public function ログインしてたらログイン情報を返却()
     {
         $response = $this->actingAs($this->user)->json('GET', route('user'));
-        // \Log::debug($response->content());
+
         $response->assertStatus(200)->assertJson(['name' => $this->user->name]);
     }
+
     /**
      * @test
      */

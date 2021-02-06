@@ -19,6 +19,7 @@ class PhotoLikeTest extends TestCase
 
         $this->user = factory(User::class)->create();
     }
+
     /**
      * @test
      */
@@ -30,11 +31,10 @@ class PhotoLikeTest extends TestCase
             'id' => Photo::first()->id
         ]));
 
-        // \Log::debug(Photo::first()->id);
-        // \Log::debug(Photo::with(['owner', 'likes'])->first());
         $response->assertStatus(200);
         $this->assertEquals(Photo::first()->like_count, '1');
     }
+
     /**
      * @test
      */
@@ -51,6 +51,7 @@ class PhotoLikeTest extends TestCase
         $response->assertStatus(200);
         $this->assertEquals(Photo::first()->like_count, '1');
     }
+
     /**
      * @test
      */

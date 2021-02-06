@@ -19,6 +19,8 @@ class DatabasesTest extends TestCase
     {
         $this->user = factory(User::class)->create();
 
-        echo $this->user;
+        $this->assertDatabaseHas('users', [
+            'name' => $this->user->name,
+        ]);
     }
 }
