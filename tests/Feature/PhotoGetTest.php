@@ -20,15 +20,15 @@ class PhotoGetTest extends TestCase
     {
         factory(Comment::class, 5)->create();
 
-        echo Photo::with(['owner', 'likes', 'comment'])->first();
-
         $response = $this->json('GET', route('photo.get'));
+
+        \Log::debug($response->content());
 
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'like_count' => 0,
                 'liked_by_user' => false,
-                'comment' => Photo::first()->user_comment
+                'user_comment' => Photo::first()->user_comment
             ]);
     }
 }

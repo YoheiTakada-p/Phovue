@@ -48,7 +48,7 @@ class PhotoController extends Controller
 
     public function get()
     {
-        $photos = Photo::with(['owner', 'likes'])->orderBy('created_at', 'desc')->get();
+        $photos = Photo::with(['owner', 'likes', 'comment'])->orderBy('created_at', 'desc')->get();
 
         return $photos;
     }
