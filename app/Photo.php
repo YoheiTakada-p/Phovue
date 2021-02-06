@@ -92,4 +92,12 @@ class Photo extends Model
         //第二引数は結合テーブル名のオーバーライド
         return $this->belongsToMany('App\User', 'likes');
     }
+
+    /**
+     * リレーションシップ - comments
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comments');
+    }
 }
