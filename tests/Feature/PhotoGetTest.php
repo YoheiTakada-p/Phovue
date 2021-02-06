@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 //add
 use App\Photo;
-use App\User;
+use App\Comment;
 
 class PhotoGetTest extends TestCase
 {
@@ -16,19 +16,19 @@ class PhotoGetTest extends TestCase
     /**
      * @test
      */
-    public function 写真を取得できる()
+    public function 写真とコメントを取得できる()
     {
-        factory(Photo::class, 5)->create();
+        factory(Comment::class, 5)->create();
 
-        echo Photo::with(['owner', 'likes'])->first();
+        echo Photo::with(['owner', 'likes', 'comment'])->first();
 
         $response = $this->json('GET', route('photo.get'));
 
-        // \Log::debug($response->content());
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'like_count' => 0,
-                'liked_by_user' => false
+                'liked_by_user' => false,
+                'comment' => Photo::first()->user_comment
             ]);
     }
 }
