@@ -18,6 +18,17 @@
         v-on:submit.prevent="upload"
         v-show="!loading"
       >
+        <div
+          class="mb-1 border border-danger rounded text-secondary bg-error"
+          v-if="photoFormErrors"
+        >
+          <ul v-if="photoFormErrors.photo">
+            <li v-for="msg in photoFormErrors.photo" :key="msg">{{ msg }}</li>
+          </ul>
+          <ul v-if="photoFormErrors.comment">
+            <li v-for="msg in photoFormErrors.comment" :key="msg">{{ msg }}</li>
+          </ul>
+        </div>
         <Message />
         <div class="form-group">
           <label>写真を選択</label>
@@ -28,7 +39,12 @@
         </div>
         <div class="form-group">
           <label for="Textarea1">コメント</label>
-          <textarea class="form-control" id="Textarea1" rows="3"></textarea>
+          <textarea
+            class="form-control"
+            id="Textarea1"
+            rows="3"
+            v-model="comment"
+          ></textarea>
         </div>
         <button type="submit" class="btn btn-primary">投稿</button>
       </form>
@@ -49,7 +65,9 @@ export default {
     return {
       preview: null,
       photo: null,
+      comment: "",
       loading: false,
+      photoFormErrors: null,
     };
   },
   methods: {
@@ -78,15 +96,20 @@ export default {
       // console.log(event.target.files[0].size);
     },
     upload: async function () {
-      if (!this.preview) {
+      if (this.preview === null) {
         alert("ファイルを選択してね！");
         return false;
+      }
+
+      if (this.comment === "") {
+        this.comment = "no comment";
       }
       //loading components on
       this.loading = true;
 
       const formData = new FormData();
       formData.append("photo", this.photo);
+      formData.append("comment", this.comment);
 
       const response = await axios
         .post("/api/photo", formData)
@@ -97,11 +120,13 @@ export default {
       this.loading = false;
 
       if (response.status === 201) {
-        console.log("upload!");
+        console.log("投稿完了");
         this.$store.commit("message/setContent", {
-          content: "投稿できたよ！",
+          content: "投稿完了！",
           timeout: 6000,
         });
+      } else if (response.status === 422) {
+        this.photoFormErrors = response.data.errors;
       } else {
         console.log("error!");
         this.$store.commit("error/setAlert", true);
@@ -110,6 +135,7 @@ export default {
     reset: function () {
       this.preview = null;
       this.photo = null;
+      this.comment = "";
       this.$el.querySelector('input[type="file"]').value = null;
     },
   },

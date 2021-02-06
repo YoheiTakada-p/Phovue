@@ -73,10 +73,6 @@ class PhotoController extends Controller
         $photo->likes()->detach(\Auth::id());
         $photo->likes()->attach(\Auth::id());
 
-        \Log::debug(Photo::where('id', $id)->with(['likes'])->first());
-        // \Log::debug($photo->likes->contains(\Auth::id()));
-        // \Log::debug(Photo::where('id', $id)->with(['likes'])->first());
-
         return response(200);
     }
 
@@ -85,8 +81,6 @@ class PhotoController extends Controller
         $photo = Photo::find($id);
 
         $photo->likes()->detach(\Auth::user()->id);
-
-        \Log::debug(Photo::where('id', $id)->with(['likes'])->first());
 
         return response(200);
     }

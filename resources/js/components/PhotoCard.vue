@@ -14,7 +14,7 @@
     <div class="card-body" style="padding: 0.7rem">
       <div class="collapse" :id="'collapse-comment-' + photo.id">
         <div>
-          <p class="text-justify">サンプルコメント</p>
+          <p class="text-justify">{{ photo.user_comment }}</p>
         </div>
       </div>
       <div class="d-flex justify-content-between">

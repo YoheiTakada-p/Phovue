@@ -2481,6 +2481,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2492,7 +2508,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       preview: null,
       photo: null,
-      loading: false
+      comment: "",
+      loading: false,
+      photoFormErrors: null
     };
   },
   methods: {
@@ -2528,7 +2546,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (this.preview) {
+                if (!(this.preview === null)) {
                   _context.next = 3;
                   break;
                 }
@@ -2537,33 +2555,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return", false);
 
               case 3:
-                //loading components on
+                if (this.comment === "") {
+                  this.comment = "no comment";
+                } //loading components on
+
+
                 this.loading = true;
                 formData = new FormData();
                 formData.append("photo", this.photo);
-                _context.next = 8;
+                formData.append("comment", this.comment);
+                _context.next = 10;
                 return axios.post("/api/photo", formData)["catch"](function (error) {
                   return error.response;
                 });
 
-              case 8:
+              case 10:
                 response = _context.sent;
                 //loading components off
                 this.reset();
                 this.loading = false;
 
                 if (response.status === 201) {
-                  console.log("upload!");
+                  console.log("投稿完了");
                   this.$store.commit("message/setContent", {
-                    content: "投稿できたよ！",
+                    content: "投稿完了！",
                     timeout: 6000
                   });
+                } else if (response.status === 422) {
+                  this.photoFormErrors = response.data.errors;
                 } else {
                   console.log("error!");
                   this.$store.commit("error/setAlert", true);
                 }
 
-              case 12:
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -2580,6 +2605,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     reset: function reset() {
       this.preview = null;
       this.photo = null;
+      this.comment = "";
       this.$el.querySelector('input[type="file"]').value = null;
     }
   }
@@ -39613,7 +39639,13 @@ var render = function() {
             staticClass: "collapse",
             attrs: { id: "collapse-comment-" + _vm.photo.id }
           },
-          [_vm._m(0)]
+          [
+            _c("div", [
+              _c("p", { staticClass: "text-justify" }, [
+                _vm._v(_vm._s(_vm.photo.user_comment))
+              ])
+            ])
+          ]
         ),
         _vm._v(" "),
         _c("div", { staticClass: "d-flex justify-content-between" }, [
@@ -39703,16 +39735,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("p", { staticClass: "text-justify" }, [_vm._v("サンプルコメント")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39793,6 +39816,37 @@ var render = function() {
             }
           },
           [
+            _vm.photoFormErrors
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "mb-1 border border-danger rounded text-secondary bg-error"
+                  },
+                  [
+                    _vm.photoFormErrors.photo
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.photoFormErrors.photo, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.photoFormErrors.comment
+                      ? _c(
+                          "ul",
+                          _vm._l(_vm.photoFormErrors.comment, function(msg) {
+                            return _c("li", { key: msg }, [_vm._v(_vm._s(msg))])
+                          }),
+                          0
+                        )
+                      : _vm._e()
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
             _c("Message"),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
@@ -39814,7 +39868,33 @@ var render = function() {
                 : _vm._e()
             ]),
             _vm._v(" "),
-            _vm._m(0),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "Textarea1" } }, [
+                _vm._v("コメント")
+              ]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.comment,
+                    expression: "comment"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "Textarea1", rows: "3" },
+                domProps: { value: _vm.comment },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.comment = $event.target.value
+                  }
+                }
+              })
+            ]),
             _vm._v(" "),
             _c(
               "button",
@@ -39829,21 +39909,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "Textarea1" } }, [_vm._v("コメント")]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { id: "Textarea1", rows: "3" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
