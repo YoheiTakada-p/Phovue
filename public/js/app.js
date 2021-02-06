@@ -2309,15 +2309,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     photo: {
       type: Object,
       required: true
     }
+  },
+  data: function data() {
+    return {
+      like_count: this.photo.like_count,
+      liked_by_user: this.photo.liked_by_user
+    };
   },
   computed: {
     isLogin: function isLogin() {
@@ -2347,18 +2350,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 console.log("いいねする");
                 _context.next = 3;
-                return axios.put("/api/photo/" + id + "/like");
+                return axios.put("/api/photo/" + id + "/like")["catch"](function (error) {
+                  return error.response;
+                });
 
               case 3:
                 response = _context.sent;
-                console.log("いいねできた");
+
+                if (response.status === 200) {
+                  this.liked_by_user = !this.liked_by_user;
+                  this.like_count += 1;
+                  console.log("いいねできた");
+                } else {
+                  console.log("error!");
+                  this.$store.commit("error/setAlert", true);
+                }
 
               case 5:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, this);
       }));
 
       function like(_x) {
@@ -2376,18 +2389,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 console.log("いいね削除する");
                 _context2.next = 3;
-                return axios["delete"]("/api/photo/" + id + "/like");
+                return axios["delete"]("/api/photo/" + id + "/like")["catch"](function (error) {
+                  return error.response;
+                });
 
               case 3:
                 response = _context2.sent;
-                console.log("いいね消せた");
+
+                if (response.status === 200) {
+                  this.liked_by_user = !this.liked_by_user;
+                  this.like_count -= 1;
+                  console.log("いいね消せた");
+                } else {
+                  console.log("error!");
+                  this.$store.commit("error/setAlert", true);
+                }
 
               case 5:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
+        }, _callee2, this);
       }));
 
       function unlike(_x2) {
@@ -39307,7 +39330,7 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "email",
-                  placeholder: "メールアドレスを入力してね",
+                  placeholder: "メールアドレスをここに入力",
                   required: ""
                 },
                 domProps: { value: _vm.loginForm.email },
@@ -39337,7 +39360,7 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "password",
-                  placeholder: "パスワードを入力してね",
+                  placeholder: "パスワードをここに入力",
                   required: ""
                 },
                 domProps: { value: _vm.loginForm.password },
@@ -39616,10 +39639,10 @@ var render = function() {
                       staticClass: "fas fa-heart",
                       staticStyle: { color: "white" }
                     }),
-                    _vm._v(_vm._s(_vm.photo.like_count) + "\n        ")
+                    _vm._v(_vm._s(_vm.like_count) + "\n        ")
                   ]
                 )
-              : _vm.photo.liked_by_user == true
+              : _vm.liked_by_user == true
               ? _c(
                   "button",
                   {
@@ -39636,10 +39659,10 @@ var render = function() {
                       staticClass: "fas fa-heart",
                       staticStyle: { color: "pink" }
                     }),
-                    _vm._v(_vm._s(_vm.photo.like_count) + "\n        ")
+                    _vm._v(_vm._s(_vm.like_count) + "\n        ")
                   ]
                 )
-              : _vm.photo.liked_by_user == false
+              : _vm.liked_by_user == false
               ? _c(
                   "button",
                   {
@@ -39656,7 +39679,7 @@ var render = function() {
                       staticClass: "fas fa-heart",
                       staticStyle: { color: "white" }
                     }),
-                    _vm._v(_vm._s(_vm.photo.like_count) + "\n        ")
+                    _vm._v(_vm._s(_vm.like_count) + "\n        ")
                   ]
                 )
               : _vm._e(),
@@ -39773,7 +39796,7 @@ var render = function() {
             _c("Message"),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("写真を選んでね")]),
+              _c("label", [_vm._v("写真を選択")]),
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control",
@@ -39926,7 +39949,7 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "text",
-                  placeholder: "名前を入力してね",
+                  placeholder: "名前をここに入力",
                   required: ""
                 },
                 domProps: { value: _vm.registerForm.name },
@@ -39953,7 +39976,7 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "email",
-                  placeholder: "メールアドレスを入力してね",
+                  placeholder: "メールアドレスをここに入力",
                   required: ""
                 },
                 domProps: { value: _vm.registerForm.email },
@@ -39983,7 +40006,7 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "password",
-                  placeholder: "パスワードを入力してね",
+                  placeholder: "パスワードをここに入力",
                   required: ""
                 },
                 domProps: { value: _vm.registerForm.password },
@@ -40013,7 +40036,7 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "password",
-                  placeholder: "同じパスワードを入力してね",
+                  placeholder: "同じパスワードをここに入力",
                   required: ""
                 },
                 domProps: { value: _vm.registerForm.password_confirmation },

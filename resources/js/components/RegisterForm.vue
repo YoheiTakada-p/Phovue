@@ -32,7 +32,7 @@
           <input
             type="text"
             class="form-control"
-            placeholder="名前を入力してね"
+            placeholder="名前をここに入力"
             v-bind:value="registerForm.name"
             v-on:input="registerForm.name = $event.target.value"
             required
@@ -43,7 +43,7 @@
           <input
             type="email"
             class="form-control"
-            placeholder="メールアドレスを入力してね"
+            placeholder="メールアドレスをここに入力"
             v-model="registerForm.email"
             required
           />
@@ -53,7 +53,7 @@
           <input
             type="password"
             class="form-control"
-            placeholder="パスワードを入力してね"
+            placeholder="パスワードをここに入力"
             v-model="registerForm.password"
             required
           />
@@ -63,7 +63,7 @@
           <input
             type="password"
             class="form-control"
-            placeholder="同じパスワードを入力してね"
+            placeholder="同じパスワードをここに入力"
             v-model="registerForm.password_confirmation"
             required
           />

@@ -20,7 +20,7 @@
       >
         <Message />
         <div class="form-group">
-          <label>写真を選んでね</label>
+          <label>写真を選択</label>
           <input type="file" class="form-control" v-on:change="onFileChange" />
           <output v-if="preview">
             <img class="output py-2" :src="preview" alt="" />

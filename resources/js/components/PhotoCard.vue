@@ -25,24 +25,21 @@
             v-on:click.prevent="alert"
             class="btn btn-sm btn-gray"
           >
-            <i class="fas fa-heart" style="color: white"></i
-            >{{ photo.like_count }}
+            <i class="fas fa-heart" style="color: white"></i>{{ like_count }}
           </button>
           <button
-            v-else-if="photo.liked_by_user == true"
+            v-else-if="liked_by_user == true"
             v-on:click.prevent="unlike(photo.id)"
             class="btn btn-sm btn-gray"
           >
-            <i class="fas fa-heart" style="color: pink"></i
-            >{{ photo.like_count }}
+            <i class="fas fa-heart" style="color: pink"></i>{{ like_count }}
           </button>
           <button
-            v-else-if="photo.liked_by_user == false"
+            v-else-if="liked_by_user == false"
             v-on:click.prevent="like(photo.id)"
             class="btn btn-sm btn-gray"
           >
-            <i class="fas fa-heart" style="color: white"></i
-            >{{ photo.like_count }}
+            <i class="fas fa-heart" style="color: white"></i>{{ like_count }}
           </button>
           <a
             :href="'/photos/' + photo.id + '/download'"
@@ -64,6 +61,12 @@ export default {
       required: true,
     },
   },
+  data: function () {
+    return {
+      like_count: this.photo.like_count,
+      liked_by_user: this.photo.liked_by_user,
+    };
+  },
   computed: {
     isLogin: function () {
       return this.$store.getters["auth/check"];
@@ -75,13 +78,33 @@ export default {
     },
     like: async function (id) {
       console.log("いいねする");
-      const response = await axios.put("/api/photo/" + id + "/like");
-      console.log("いいねできた");
+      const response = await axios
+        .put("/api/photo/" + id + "/like")
+        .catch((error) => error.response);
+
+      if (response.status === 200) {
+        this.liked_by_user = !this.liked_by_user;
+        this.like_count += 1;
+        console.log("いいねできた");
+      } else {
+        console.log("error!");
+        this.$store.commit("error/setAlert", true);
+      }
     },
     unlike: async function (id) {
       console.log("いいね削除する");
-      const response = await axios.delete("/api/photo/" + id + "/like");
-      console.log("いいね消せた");
+      const response = await axios
+        .delete("/api/photo/" + id + "/like")
+        .catch((error) => error.response);
+
+      if (response.status === 200) {
+        this.liked_by_user = !this.liked_by_user;
+        this.like_count -= 1;
+        console.log("いいね消せた");
+      } else {
+        console.log("error!");
+        this.$store.commit("error/setAlert", true);
+      }
     },
   },
 };

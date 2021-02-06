@@ -29,7 +29,7 @@
           <input
             type="email"
             class="form-control"
-            placeholder="メールアドレスを入力してね"
+            placeholder="メールアドレスをここに入力"
             v-model="loginForm.email"
             required
           />
@@ -39,7 +39,7 @@
           <input
             type="password"
             class="form-control"
-            placeholder="パスワードを入力してね"
+            placeholder="パスワードをここに入力"
             v-model="loginForm.password"
             required
           />
