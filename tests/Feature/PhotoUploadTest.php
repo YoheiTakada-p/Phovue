@@ -29,10 +29,14 @@ class PhotoUploadTest extends TestCase
 
         $response = $this->actingAs($this->user)
             ->json('POST', route('photo.post'), [
-                'photo' => UploadedFile::fake()->image('photo.jpg')
+                'photo' => UploadedFile::fake()->image('photo.jpg'),
+                'comment' => 'testComment'
             ]);
 
-        $response->assertStatus(201);
+        $response->assertStatus(201)
+            ->assertJsonFragment([
+                'comment' => 'testComment'
+            ]);
 
         $photo = Photo::first();
 
