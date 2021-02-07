@@ -27,7 +27,7 @@ class PhotoDeleteTest extends TestCase
     /**
      * @test
      */
-    public function 写真を削除する()
+    public function 写真に関係する投稿を全て削除する()
     {
         $photo = Photo::first();
 

@@ -86,11 +86,13 @@ class PhotoController extends Controller
 
         \Storage::cloud()->delete($photo->filename);
 
-        $photo->likes()->detach(\Auth::id());
+        \DB::transaction(function () use ($photo) {
+            $photo->likes()->detach(\Auth::id());
 
-        $photo->comment()->first()->delete();
+            $photo->comment()->first()->delete();
 
-        $photo->delete();
+            $photo->delete();
+        });
 
         return response(200);
     }
