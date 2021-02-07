@@ -84,7 +84,7 @@ export default {
 
       if (response.status === 200) {
         this.liked_by_user = !this.liked_by_user;
-        this.like_count += 1;
+        this.like_count++;
         console.log("いいねできた");
       } else {
         console.log("error!");
@@ -99,7 +99,7 @@ export default {
 
       if (response.status === 200) {
         this.liked_by_user = !this.liked_by_user;
-        this.like_count -= 1;
+        this.like_count--;
         console.log("いいね消せた");
       } else {
         console.log("error!");

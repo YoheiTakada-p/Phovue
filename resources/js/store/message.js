@@ -3,15 +3,21 @@ const state = {
 }
 
 const mutations = {
-  setContent(state, { content, timeout }) {
+  setContent(state, content) {
     state.content = content
+  }
+}
 
-    setTimeout(() => (state.content = ''), timeout)
+const actions = {
+  content(context, { content, timeout }) {
+    context.commit('setContent', content)
+    setTimeout(() => (context.commit('setContent', '')), timeout)
   }
 }
 
 export default {
   namespaced: true,
   state,
-  mutations
+  mutations,
+  actions
 }

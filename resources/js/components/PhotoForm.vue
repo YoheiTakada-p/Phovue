@@ -121,7 +121,7 @@ export default {
 
       if (response.status === 201) {
         console.log("投稿完了");
-        this.$store.commit("message/setContent", {
+        this.$store.commit("message/content", {
           content: "投稿完了！",
           timeout: 6000,
         });

@@ -2359,7 +2359,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status === 200) {
                   this.liked_by_user = !this.liked_by_user;
-                  this.like_count += 1;
+                  this.like_count++;
                   console.log("いいねできた");
                 } else {
                   console.log("error!");
@@ -2398,7 +2398,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status === 200) {
                   this.liked_by_user = !this.liked_by_user;
-                  this.like_count -= 1;
+                  this.like_count--;
                   console.log("いいね消せた");
                 } else {
                   console.log("error!");
@@ -2577,7 +2577,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status === 201) {
                   console.log("投稿完了");
-                  this.$store.commit("message/setContent", {
+                  this.$store.commit("message/content", {
                     content: "投稿完了！",
                     timeout: 6000
                   });
@@ -57722,7 +57722,7 @@ var actions = {
     }))();
   },
   //ログアウト
-  logout: function logout(context, data) {
+  logout: function logout(context) {
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
       var response;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
@@ -57874,19 +57874,25 @@ var state = {
   content: ''
 };
 var mutations = {
-  setContent: function setContent(state, _ref) {
+  setContent: function setContent(state, content) {
+    state.content = content;
+  }
+};
+var actions = {
+  content: function content(context, _ref) {
     var content = _ref.content,
         timeout = _ref.timeout;
-    state.content = content;
+    context.commit('setContent', content);
     setTimeout(function () {
-      return state.content = '';
+      return context.commit('setContent', '');
     }, timeout);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: state,
-  mutations: mutations
+  mutations: mutations,
+  actions: actions
 });
 
 /***/ }),

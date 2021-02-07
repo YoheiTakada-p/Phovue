@@ -8,8 +8,12 @@ const getters = {
   user: state => {
     return state.user
   },
-  check: state => state.user !== null,
-  username: state => state.user ? state.user.name : ''
+  check: state => {
+    return state.user !== null
+  },
+  username: state => {
+    return state.user ? state.user.name : ''
+  }
 }
 
 const mutations = {
@@ -42,6 +46,7 @@ const actions = {
       context.commit('error/setAlert', true, { root: true })
     }
   },
+
   //ログイン
   async login(context, data) {
     console.log('ログイン')
@@ -59,8 +64,9 @@ const actions = {
       context.commit('error/setAlert', true, { root: true })
     }
   },
+
   //ログアウト
-  async logout(context, data) {
+  async logout(context) {
     console.log('ログアウト')
     const response = await axios.post('/api/logout')
       .catch(error => error.response)
@@ -70,8 +76,8 @@ const actions = {
     } else {
       context.commit('error/setAlert', true, { root: true })
     }
-
   },
+
   //ユーサー取得
   async currentUser(context) {
     console.log('ユーザー取得')
