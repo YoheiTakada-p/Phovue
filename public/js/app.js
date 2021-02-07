@@ -2577,7 +2577,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status === 201) {
                   console.log("投稿完了");
-                  this.$store.commit("utility/setAddNewPhoto", true);
+                  this.$store.commit("utility/setReacquirePhotos", true);
                   this.$store.dispatch("message/content", {
                     content: "投稿完了！",
                     timeout: 6000
@@ -2802,6 +2802,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       photos: []
     };
   },
+  computed: {
+    reacquirePhotos: function reacquirePhotos() {
+      return this.$store.state.utility.reacquirePhotos;
+    }
+  },
   methods: {
     fetchPhotos: function () {
       var _fetchPhotos = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -2825,7 +2830,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   this.$store.commit("error/setCode", response.status);
                 }
 
-              case 5:
+                this.$store.commit("utility/setReacquirePhotos", false);
+
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -2841,17 +2848,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }()
   },
   watch: {
-    $route: {
+    reacquirePhotos: {
       handler: function () {
         var _handler = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
           return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
-                  _context2.next = 2;
+                  if (!this.reacquirePhotos) {
+                    _context2.next = 3;
+                    break;
+                  }
+
+                  _context2.next = 3;
                   return this.fetchPhotos();
 
-                case 2:
+                case 3:
                 case "end":
                   return _context2.stop();
               }
@@ -57911,11 +57923,11 @@ var actions = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var state = {
-  addNewPhoto: null
+  reacquirePhotos: true
 };
 var mutations = {
-  setAddNewPhoto: function setAddNewPhoto(state, created) {
-    state.addNewPhoto = created;
+  setReacquirePhotos: function setReacquirePhotos(state, created) {
+    state.reacquirePhotos = created;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

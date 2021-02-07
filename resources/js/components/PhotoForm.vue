@@ -121,7 +121,7 @@ export default {
 
       if (response.status === 201) {
         console.log("投稿完了");
-        this.$store.commit("utility/setAddNewPhoto", true);
+        this.$store.commit("utility/setReacquirePhotos", true);
         this.$store.dispatch("message/content", {
           content: "投稿完了！",
           timeout: 6000,

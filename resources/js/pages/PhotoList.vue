@@ -22,6 +22,11 @@ export default {
       photos: [],
     };
   },
+  computed: {
+    reacquirePhotos: function () {
+      return this.$store.state.utility.reacquirePhotos;
+    },
+  },
   methods: {
     fetchPhotos: async function () {
       console.log("写真取得");
@@ -34,12 +39,16 @@ export default {
       } else {
         this.$store.commit("error/setCode", response.status);
       }
+
+      this.$store.commit("utility/setReacquirePhotos", false);
     },
   },
   watch: {
-    $route: {
+    reacquirePhotos: {
       handler: async function () {
-        await this.fetchPhotos();
+        if (this.reacquirePhotos) {
+          await this.fetchPhotos();
+        }
       },
       immediate: true,
     },

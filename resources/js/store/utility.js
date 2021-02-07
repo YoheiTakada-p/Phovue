@@ -1,10 +1,10 @@
 const state = {
-  addNewPhoto: null
+  reacquirePhotos: true
 }
 
 const mutations = {
-  setAddNewPhoto: function (state, created) {
-    state.addNewPhoto = created
+  setReacquirePhotos: function (state, created) {
+    state.reacquirePhotos = created
   }
 }
 
