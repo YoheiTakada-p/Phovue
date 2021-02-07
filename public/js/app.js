@@ -2577,7 +2577,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status === 201) {
                   console.log("投稿完了");
-                  this.$store.commit("message/content", {
+                  this.$store.commit("utility/setAddNewPhoto", true);
+                  this.$store.dispatch("message/content", {
                     content: "投稿完了！",
                     timeout: 6000
                   });
@@ -57844,6 +57845,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./resources/js/store/auth.js");
 /* harmony import */ var _error__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./error */ "./resources/js/store/error.js");
 /* harmony import */ var _message__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./message */ "./resources/js/store/message.js");
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utility */ "./resources/js/store/utility.js");
+
 
 
 
@@ -57854,7 +57857,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
     auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"],
     error: _error__WEBPACK_IMPORTED_MODULE_3__["default"],
-    message: _message__WEBPACK_IMPORTED_MODULE_4__["default"]
+    message: _message__WEBPACK_IMPORTED_MODULE_4__["default"],
+    utility: _utility__WEBPACK_IMPORTED_MODULE_5__["default"]
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);
@@ -57893,6 +57897,31 @@ var actions = {
   state: state,
   mutations: mutations,
   actions: actions
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/utility.js":
+/*!***************************************!*\
+  !*** ./resources/js/store/utility.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {
+  addNewPhoto: null
+};
+var mutations = {
+  setAddNewPhoto: function setAddNewPhoto(state, created) {
+    state.addNewPhoto = created;
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  mutations: mutations
 });
 
 /***/ }),
