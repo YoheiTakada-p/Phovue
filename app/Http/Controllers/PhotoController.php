@@ -79,4 +79,9 @@ class PhotoController extends Controller
 
         return response(200);
     }
+
+    public function delete(String $id)
+    {
+        return response(200);
+    }
 }

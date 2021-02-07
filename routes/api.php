@@ -32,6 +32,8 @@ Route::get('/photo', 'PhotoController@get')->name('photo.get');
 Route::put('/photo/{id}/like', 'PhotoController@like')->name('photo.like');
 //いいねを解除する
 Route::delete('/photo/{id}/like', 'PhotoController@unlike')->name('photo.unlike');
+//投稿を削除する
+Route::delete('/photo/{id}/delete', 'PhotoController@delete')->name('photo.delete');
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
