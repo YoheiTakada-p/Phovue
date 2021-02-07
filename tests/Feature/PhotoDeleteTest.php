@@ -18,7 +18,9 @@ class PhotoDeleteTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class)->create();
+        factory(Comment::class, 5)->create();
+
+        $this->user = User::first();
     }
 
     /**
@@ -26,22 +28,12 @@ class PhotoDeleteTest extends TestCase
      */
     public function 写真を削除する()
     {
-        factory(Photo::class)->create([
-            'user_id' => $this->user->id
-        ]);
-
         $photo = Photo::first();
 
         $photo->likes()->attach($this->user->id);
 
-        $comment = new Comment(['comment' => 'sampleTest']);
-
-        $photo->comment()->save($comment);
-
-        \Log::debug(Photo::with(['owner', 'likes', 'comment'])->first());
-
         $response = $this->actingAs($this->user)->json('DELETE', route('photo.delete', [
-            'id' => Photo::first()->id
+            'id' => $photo->id
         ]));
 
         $response->assertStatus(200);

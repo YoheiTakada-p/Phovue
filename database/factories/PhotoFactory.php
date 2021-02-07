@@ -6,10 +6,11 @@ use App\Model;
 use Faker\Generator as Faker;
 
 $factory->define(App\Photo::class, function (Faker $faker) {
+    $id = \Str::random(12);
     return [
-        'id' => \Str::random(12),
+        'id' => $id,
         'user_id' => fn () => factory(App\User::class)->create()->id,
-        'filename' => \Str::random(12) . '.jpg',
+        'filename' => $id . '.jpg',
         'created_at' => $faker->dateTime(),
         'updated_at' => $faker->dateTime()
     ];
