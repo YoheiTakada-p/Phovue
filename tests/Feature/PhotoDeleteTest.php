@@ -46,15 +46,15 @@ class PhotoDeleteTest extends TestCase
 
         $response->assertStatus(200);
 
-        $this->assertDatabaseHas('photos', [
+        $this->assertDatabaseMissing('photos', [
             'id' => $photo->id,
         ]);
 
-        $this->assertDatabaseHas('likes', [
+        $this->assertDatabaseMissing('likes', [
             'photo_id' => $photo->id,
         ]);
 
-        $this->assertDatabaseHas('comments', [
+        $this->assertDatabaseMissing('comments', [
             'photo_id' => $photo->id,
         ]);
     }
