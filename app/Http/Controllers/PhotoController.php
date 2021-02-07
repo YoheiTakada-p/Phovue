@@ -82,6 +82,16 @@ class PhotoController extends Controller
 
     public function delete(String $id)
     {
+        $photo = Photo::find($id);
+
+        \Storage::cloud()->delete($photo->filename);
+
+        $photo->likes()->detach(\Auth::id());
+
+        $photo->comment()->first()->delete();
+
+        $photo->delete();
+
         return response(200);
     }
 }

@@ -9,6 +9,7 @@ use Tests\TestCase;
 use App\User;
 use App\Photo;
 use App\Comment;
+use Illuminate\Http\UploadedFile;
 
 class PhotoDeleteTest extends TestCase
 {
@@ -30,6 +31,11 @@ class PhotoDeleteTest extends TestCase
     {
         $photo = Photo::first();
 
+        \Storage::fake('s3');
+
+        \Storage::cloud()
+            ->putFileAs('', UploadedFile::fake()->image('photo.jpg'), $photo->filename, 'public');
+
         $photo->likes()->attach($this->user->id);
 
         $response = $this->actingAs($this->user)->json('DELETE', route('photo.delete', [
@@ -37,6 +43,8 @@ class PhotoDeleteTest extends TestCase
         ]));
 
         $response->assertStatus(200);
+
+        \Storage::cloud()->assertMissing($photo->filename);
 
         $this->assertDatabaseMissing('photos', [
             'id' => $photo->id,
