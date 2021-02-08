@@ -13,13 +13,24 @@
     </div>
     <div class="card-body" style="padding: 0.7rem">
       <div class="collapse" :id="'collapse-comment-' + photo.id">
-        <div>
-          <p class="text-justify">{{ photo.user_comment }}</p>
+        <div class="px-1">
+          <p class="text-justify pl-1">{{ photo.user_comment }}</p>
+          <div
+            class="d-flex flex-row-reverse border-top border-bottom py-1"
+            v-if="photo.owner.id == userId"
+          >
+            <button
+              class="btn btn-sm btn-gray mr-1"
+              v-on:click.prevent="postDelete(photo.id)"
+            >
+              <i class="fas fa-trash" style="color: red"></i>
+            </button>
+          </div>
         </div>
       </div>
-      <div class="d-flex justify-content-between">
-        <span class="my-auto">{{ photo.owner.name }}</span>
-        <div>
+      <div class="d-flex justify-content-between pt-1 mx-1">
+        <span class="my-auto pl-1">{{ photo.owner.name }}</span>
+        <div class="mr-1">
           <button
             v-if="isLogin == false"
             v-on:click.prevent="alert"
@@ -71,6 +82,9 @@ export default {
     isLogin: function () {
       return this.$store.getters["auth/check"];
     },
+    userId: function () {
+      return this.$store.getters["auth/user_id"];
+    },
   },
   methods: {
     alert: function () {
@@ -101,6 +115,20 @@ export default {
         this.liked_by_user = !this.liked_by_user;
         this.like_count--;
         console.log("いいね消せた");
+      } else {
+        console.log("error!");
+        this.$store.commit("error/setAlert", true);
+      }
+    },
+    postDelete: async function (id) {
+      console.log("投稿削除");
+      const response = await axios
+        .delete("/api/photo/" + id + "/delete")
+        .catch((error) => error.response);
+
+      if (response.status === 200) {
+        this.$store.commit("utility/setReacquirePhotos", true);
+        console.log("投稿削除できた");
       } else {
         console.log("error!");
         this.$store.commit("error/setAlert", true);

@@ -5,14 +5,17 @@ const state = {
 }
 
 const getters = {
-  user: state => {
-    return state.user
-  },
+  // user: state => {
+  //   return state.user
+  // },
   check: state => {
     return state.user !== null
   },
   username: state => {
     return state.user ? state.user.name : ''
+  },
+  user_id: state => {
+    return state.user ? state.user.id : ''
   }
 }
 

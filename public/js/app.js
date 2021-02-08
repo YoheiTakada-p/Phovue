@@ -2309,6 +2309,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     photo: {
@@ -2325,6 +2336,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     isLogin: function isLogin() {
       return this.$store.getters["auth/check"];
+    },
+    userId: function userId() {
+      return this.$store.getters["auth/user_id"];
     }
   },
   methods: {
@@ -2418,6 +2432,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return unlike;
+    }(),
+    postDelete: function () {
+      var _postDelete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(id) {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                console.log("投稿削除");
+                _context3.next = 3;
+                return axios["delete"]("/api/photo/" + id + "/delete")["catch"](function (error) {
+                  return error.response;
+                });
+
+              case 3:
+                response = _context3.sent;
+
+                if (response.status === 200) {
+                  this.$store.commit("utility/setReacquirePhotos", true);
+                  console.log("投稿削除できた");
+                } else {
+                  console.log("error!");
+                  this.$store.commit("error/setAlert", true);
+                }
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function postDelete(_x3) {
+        return _postDelete.apply(this, arguments);
+      }
+
+      return postDelete;
     }()
   }
 });
@@ -39653,20 +39705,50 @@ var render = function() {
             attrs: { id: "collapse-comment-" + _vm.photo.id }
           },
           [
-            _c("div", [
-              _c("p", { staticClass: "text-justify" }, [
+            _c("div", { staticClass: "px-1" }, [
+              _c("p", { staticClass: "text-justify pl-1" }, [
                 _vm._v(_vm._s(_vm.photo.user_comment))
-              ])
+              ]),
+              _vm._v(" "),
+              _vm.photo.owner.id == _vm.userId
+                ? _c(
+                    "div",
+                    {
+                      staticClass:
+                        "d-flex flex-row-reverse border-top border-bottom py-1"
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-sm btn-gray mr-1",
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.postDelete(_vm.photo.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fas fa-trash",
+                            staticStyle: { color: "red" }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                : _vm._e()
             ])
           ]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "d-flex justify-content-between" }, [
-          _c("span", { staticClass: "my-auto" }, [
+        _c("div", { staticClass: "d-flex justify-content-between pt-1 mx-1" }, [
+          _c("span", { staticClass: "my-auto pl-1" }, [
             _vm._v(_vm._s(_vm.photo.owner.name))
           ]),
           _vm._v(" "),
-          _c("div", [
+          _c("div", { staticClass: "mr-1" }, [
             _vm.isLogin == false
               ? _c(
                   "button",
@@ -57628,14 +57710,17 @@ var state = {
   registerErrorMessages: null
 };
 var getters = {
-  user: function user(state) {
-    return state.user;
-  },
+  // user: state => {
+  //   return state.user
+  // },
   check: function check(state) {
     return state.user !== null;
   },
   username: function username(state) {
     return state.user ? state.user.name : '';
+  },
+  user_id: function user_id(state) {
+    return state.user ? state.user.id : '';
   }
 };
 var mutations = {
