@@ -1,7 +1,7 @@
 ## phovue  
 ちょっとした事を写真といっしょにさくっと投稿してみよう  
 
-laravelとvueの練習です  
+laravelとvueとAWSの練習です  
 
 以下URLです  
 https://phovue.tk  
